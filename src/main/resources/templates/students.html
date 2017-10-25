@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Students</title>
+</head>
+
+<body>
+
+  <div>
+    <h1>Welcome to students page</h1>
+  </div>
+
+<div >
+  <table border="1">
+    <tr>
+      <th>Name</th>
+    </tr>
+    <tr th:each="dupa : ${beatles}">
+      <td th:text="${dupa.name}"></td>
+    </tr>
+  </table>
+</div>
+
+</body>
+</html>
