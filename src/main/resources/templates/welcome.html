@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Siemka</title>
+</head>
+
+<body>
+
+  <div>
+    <h1>Welcome</h1>
+    <h2>
+      <span th:text="'Message: ' + ${message}"></span>
+      <span th:text="'Name: ' + ${someone.name}"></span>
+    </h2>
+  </div>
+
+<div >
+  <table border="1">
+    <tr>
+      <th>Name</th>
+      <th>Surname</th>
+    </tr>
+    <tr th:each="dupa : ${friends}">
+      <td th:text="${dupa.name}"></td>
+      <td th:text="${dupa.surname}"></td>
+    </tr>
+  </table>
+</div>
+
+</body>
+</html>
