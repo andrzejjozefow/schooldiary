@@ -32,11 +32,11 @@ public class Student {
     this.name = name;
   }
 
-  public Integer getStudentId() {
+  public Integer getId() {
     return studentId;
   }
 
-  public void setStudentId(Integer studentId) {
+  public void setId(Integer studentId) {
     this.studentId = studentId;
   }
 
