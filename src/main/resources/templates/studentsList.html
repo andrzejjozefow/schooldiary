@@ -6,19 +6,22 @@
 
 <body>
 
-  <div>
-    <h1>Welcome to students page</h1>
-  </div>
+<div>
+  <h1 align="center">Welcome to students page</h1>
+</div>
 
-<div >
-  <table border="1">
+<div>
+  <table border="1" align="center">
     <tr>
       <th>Name</th>
     </tr>
-    <tr th:each="dupa : ${student}">
-      <td th:text="${dupa.name}"></td>
+    <tr th:each="student : ${student}">
+      <td th:text="${student.name}"></td>
     </tr>
   </table>
+</div>
+<div>
+  <h2 align="center"><a href="http://localhost:8080/students/new">Add new student</a></h2>
 </div>
 
 </body>

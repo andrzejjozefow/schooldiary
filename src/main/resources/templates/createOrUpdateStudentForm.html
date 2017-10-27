@@ -8,12 +8,13 @@
 <div>
   <h1>Add new student</h1>
   <form th:object="${student}" class="form-horizontal" id="add-student-form" method="post">
-    Name:<br>
+    Name:<br/>
     <input type="text" th:field="*{name}" />
     <button
-        th:with="text=${student['new']} ? 'Add Student' : 'Update Student'"
+        th:with="text='Add Student'"
         class="btn btn-default" type="submit" th:text="${text}">Add
-      Student</button>
+      Student
+    </button>
   </form>
 </div>
 </body>

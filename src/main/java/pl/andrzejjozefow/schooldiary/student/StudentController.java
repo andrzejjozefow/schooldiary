@@ -8,8 +8,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-import pl.andrzejjozefow.schooldiary.student.StudentService;
 
 @Controller
 public class StudentController {
@@ -38,10 +36,9 @@ public class StudentController {
       return "createOrUpdateStudentForm";
     } else {
       this.studentService.addStudent(student);
-      return "redirect:/students/" + student.getId();
+      return "redirect:/students/";
     }
   }
-
 
   @RequestMapping("/students")
   public String students(Map<String, Object> model) {
@@ -50,15 +47,4 @@ public class StudentController {
     return "studentsList";
   }
 
-
-
-//  @RequestMapping(method = RequestMethod.POST, value = "/students")
-//  public void addLesson(@RequestBody Student student) {
-//    studentService.addStudent(student);
-//  }
-//
-//  @RequestMapping("/students")
-//  public List<Student> getAllStudents() {
-//    return studentService.getAllStudents();
-//  }
 }
