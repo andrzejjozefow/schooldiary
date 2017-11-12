@@ -5,47 +5,47 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.hibernate.validator.constraints.NotEmpty;
 import pl.andrzejjozefow.schooldiary.student.Student;
 
 @Entity
-@Table(name = "LESSON")
 public class Lesson {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "LESSON_ID")
-  private Integer lessonId;
+  private Integer id;
 
-  @Column(name = "STUDENT_ID")
-  private Integer studentId;
+  @ManyToOne
+  @JoinColumn
+  private Student student;
 
-  @Column(name = "LESSON_SUBJECT")
   @NotEmpty
   private String subject;
 
   public Lesson() {
   }
 
-  public Lesson(Integer studentId, String subject) {
-    this.studentId = studentId;
+  public Lesson(Student student, String subject) {
+    this.student = student;
     this.subject = subject;
   }
 
-  public Lesson(Integer lessonId, Student student, String subject) {
-    this.lessonId = lessonId;
-    this.studentId = studentId;
+  public Lesson(Integer id, Student student, String subject) {
+    this.id = id;
+    this.student = student;
     this.subject = subject;
 
   }
 
-  public Integer getLessonId() {
-    return lessonId;
+  public Integer getId() {
+    return id;
   }
 
-  public void setLessonId(Integer lessonId) {
-    this.lessonId = lessonId;
+  public void setId(Integer id) {
+    this.id = id;
   }
 
   public String getSubject() {
@@ -56,11 +56,7 @@ public class Lesson {
     this.subject = subject;
   }
 
-  public void setStudentId(Integer studentId) {
-    this.studentId = studentId;
-  }
-
-  public Integer getStudentId() {
-    return studentId;
+  public Student getStudent() {
+    return student;
   }
 }

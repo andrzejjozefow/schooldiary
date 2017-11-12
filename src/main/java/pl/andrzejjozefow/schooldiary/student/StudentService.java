@@ -29,6 +29,6 @@ public class StudentService {
   }
 
   public Student findStudentById (Integer studentId){
-    return studentRepository.findByStudentId(studentId);
+    return studentRepository.findById(studentId);
   }
 }

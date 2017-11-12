@@ -30,25 +30,26 @@ public class LessonController {
 
   @InitBinder
   public void setAllowedFields(WebDataBinder dataBinder) {
-    dataBinder.setDisallowedFields("STUDENT_ID", "LESSON_ID");
+    dataBinder.setDisallowedFields("id");
   }
 
-  public void loadStudentWithLesson(int studentId, Lesson lesson, Map<String, Object> model) {
-    Student student = this.studentService.findStudentById(studentId);
+  public void loadStudentWithLesson(Student student, Lesson lesson, Map<String, Object> model) {
+   student = this.studentService.findStudentById(student.getId());
     model.put("student", student);
     student.addLesson(lesson);
     model.put("lesson", lesson);
   }
 
   @RequestMapping(value = "students/{studentId}/lessons/new", method = RequestMethod.GET)
-  public String initNewVisitForm(@PathVariable("studentId") int studentId, Map<String, Object> model) {
-    loadStudentWithLesson(studentId, new Lesson(), model);
+  public String initNewVisitForm(@PathVariable("studentId") Student student, Map<String, Object> model) {
+    loadStudentWithLesson(student, new Lesson(), model);
     return "createOrUpdateLessonForm";
   }
 
   @RequestMapping(value = "students/{studentId}/lessons/new", method = RequestMethod.POST)
-  public String processNewVisitForm(@PathVariable("studentId") int studentId, @Valid Lesson lesson, BindingResult result,Map<String, Object> model ) {
-    loadStudentWithLesson(studentId, lesson, model);
+  public String processNewVisitForm(@PathVariable("studentId") Student student, @Valid Lesson lesson,
+      BindingResult result, Map<String, Object> model ) {
+    loadStudentWithLesson(student, lesson, model);
     if (result.hasErrors()) {
       return "createOrUpdateLessonForm";
     } else {
