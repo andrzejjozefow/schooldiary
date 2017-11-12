@@ -6,8 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class StudentController {
@@ -45,6 +47,13 @@ public class StudentController {
     model.put("student", studentService.getAllStudents());
 
     return "studentsList";
+  }
+
+  @RequestMapping("/students/{studentId}")
+  public ModelAndView showOwner(@PathVariable("studentId") int studentId) {
+    ModelAndView mav = new ModelAndView("studentDetails");
+    mav.addObject(this.studentService.findStudentById(studentId));
+    return mav;
   }
 
 }
