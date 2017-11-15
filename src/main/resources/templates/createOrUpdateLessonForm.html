@@ -1,0 +1,28 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<b>Student</b>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Name</th>
+  </tr>
+  </thead>
+  <tr>
+    <td th:text="${student.name}" />
+  </tr>
+</table>
+
+<form th:object="${lesson}" class="form-horizontal" method="post">
+  <div class="form-group has-feedback">
+    <input type="text" th:field="*{subject}" />
+  </div>
+  <div>
+      <input type="hidden" name="student" th:value="${student.id}" />
+      <button type="submit">Add Lesson</button>
+  </div>
+</form>
+
+</body>
+</html>

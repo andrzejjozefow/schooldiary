@@ -8,24 +8,22 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import org.hibernate.validator.constraints.NotEmpty;
 import pl.andrzejjozefow.schooldiary.student.Student;
 
 @Entity
-@Table(name = "LESSON")
 public class Lesson {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "LESSON_ID")
-  private Integer lessonId;
+  private Integer id;
 
   @ManyToOne
-  @JoinColumn(name = "STUDENT_ID")
+  @JoinColumn
   private Student student;
 
-  @Column(name = "LESSON_SUBJECT")
+  @NotEmpty
   private String subject;
-
 
   public Lesson() {
   }
@@ -35,19 +33,19 @@ public class Lesson {
     this.subject = subject;
   }
 
-  public Lesson(Integer lessonId, Student student, String subject) {
-    this.lessonId = lessonId;
+  public Lesson(Integer id, Student student, String subject) {
+    this.id = id;
     this.student = student;
     this.subject = subject;
 
   }
 
-  public Integer getLessonId() {
-    return lessonId;
+  public Integer getId() {
+    return id;
   }
 
-  public void setLessonId(Integer lessonId) {
-    this.lessonId = lessonId;
+  public void setId(Integer id) {
+    this.id = id;
   }
 
   public String getSubject() {
@@ -60,9 +58,5 @@ public class Lesson {
 
   public Student getStudent() {
     return student;
-  }
-
-  public void setStudent(Student student) {
-    this.student = student;
   }
 }

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+
+<h2>Student Information</h2>
+
+
+<table class="table table-striped" th:object="${student}">
+  <tr>
+    <th>Name</th>
+    <td><b th:text="*{name}"></b></td>
+  </tr>
+</table>
+
+
+<br />
+<br />
+<br />
+<h2>Lessons</h2>
+
+<table class="table table-striped">
+
+  <tr th:each="lesson : ${student.lessons}">
+    <td valign="top">
+      <dl class="dl-horizontal">
+        <dt>Name</dt>
+        <dd th:text="${student.name}" />
+      </dl>
+    </td>
+    <td valign="top">
+      <table class="table-condensed">
+        <thead>
+        <tr>
+          <th>Description</th>
+        </tr>
+        </thead>
+        <tr th:each="lesson : ${student.lessons}">
+          <td th:text="${lesson?.subject}"></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+</table>
+
+</body>
+
+</html>

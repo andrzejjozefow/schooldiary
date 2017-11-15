@@ -21,9 +21,14 @@ public class StudentService {
     return studentRepository.findOne(id);
   }
 
+
   public List<Student> getAllStudents() {
     List<Student> students = new ArrayList<>();
     studentRepository.findAll().forEach(students::add);
     return students;
+  }
+
+  public Student findStudentById (Integer studentId){
+    return studentRepository.findById(studentId);
   }
 }
