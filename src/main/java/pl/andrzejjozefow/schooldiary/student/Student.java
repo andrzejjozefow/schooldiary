@@ -7,26 +7,31 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import org.springframework.beans.support.MutableSortDefinition;
 import org.springframework.beans.support.PropertyComparator;
 import pl.andrzejjozefow.schooldiary.lesson.Lesson;
 
 @Entity
+@Table(name = "STUDENT")
 public class Student {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer id;
+  @Column(name = "STUDENT_ID")
+  private Integer studentId;
 
+  @Column(name = "STUDENT_NAME")
   private String name;
 
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "student", fetch = FetchType.EAGER)
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "studentId", fetch = FetchType.EAGER)
   private Set<Lesson> lessons = new LinkedHashSet<>();
 
 
@@ -37,17 +42,17 @@ public class Student {
     this.name = name;
   }
 
-  public Student(Integer id, String name) {
-    this.id = id;
+  public Student(Integer studentId, String name) {
+    this.studentId = studentId;
     this.name = name;
   }
 
   public Integer getId() {
-    return id;
+    return studentId;
   }
 
-  public void setId(Integer id) {
-    this.id = id;
+  public void setId(Integer studentId) {
+    this.studentId = studentId;
   }
 
   public String getName() {
@@ -78,7 +83,7 @@ public class Student {
 
   public void addLesson(Lesson lesson) {
     getLessonsInternal().add(lesson);
-    lesson.getStudent().getId();
+    lesson.setStudentId(this.getId());
   }
 
 }

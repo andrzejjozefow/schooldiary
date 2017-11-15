@@ -18,8 +18,9 @@
   <div class="form-group has-feedback">
     <input type="text" th:field="*{subject}" />
   </div>
+
   <div>
-      <input type="hidden" name="student" th:value="${student.id}" />
+      <input type="hidden" name="studentId" th:value="${student.id}" />
       <button type="submit">Add Lesson</button>
   </div>
 </form>

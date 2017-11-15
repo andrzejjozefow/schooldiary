@@ -22,7 +22,7 @@ public class StudentController {
 
   @InitBinder
   public void setAllowedFields(WebDataBinder dataBinder) {
-    dataBinder.setDisallowedFields("id");
+    dataBinder.setDisallowedFields("STUDENT_ID");
   }
 
   @RequestMapping(value = "/students/new", method = RequestMethod.GET)
@@ -50,9 +50,9 @@ public class StudentController {
   }
 
   @RequestMapping("/students/{studentId}")
-  public ModelAndView showOwner(@PathVariable("studentId") Student student) {
+  public ModelAndView showOwner(@PathVariable("studentId") int studentId) {
     ModelAndView mav = new ModelAndView("studentDetails");
-    mav.addObject(this.studentService.findStudentById(student.getId()));
+    mav.addObject(this.studentService.findStudentById(studentId));
     return mav;
   }
 
