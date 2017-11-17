@@ -3,7 +3,7 @@
 <body>
 
 <b>Student</b>
-<table class="table table-striped">
+<table>
   <thead>
   <tr>
     <th>Name</th>
@@ -14,13 +14,12 @@
   </tr>
 </table>
 
-<form th:object="${lesson}" class="form-horizontal" method="post">
+<form th:object="${lesson}" method="post">
   <div class="form-group has-feedback">
     <input type="text" th:field="*{subject}" />
   </div>
-
   <div>
-      <input type="hidden" name="studentid" th:value="${student.id}" />
+      <input type="hidden" name="student_id" th:value="${student.id}" />
       <button type="submit">Add Lesson</button>
   </div>
 </form>
