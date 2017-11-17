@@ -19,7 +19,6 @@ public class Lesson {
   private Integer id;
 
   @ManyToOne
-  @JoinColumn
   private Student student;
 
   @NotEmpty

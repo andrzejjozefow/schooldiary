@@ -10,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import org.springframework.beans.support.MutableSortDefinition;
 import org.springframework.beans.support.PropertyComparator;
@@ -25,6 +26,7 @@ public class Student {
   private String name;
 
   @OneToMany
+  @JoinColumn
   private Set<Lesson> lessons = new LinkedHashSet<>();
 
 
@@ -52,14 +54,14 @@ public class Student {
     return this.lessons;
   }
 
-  protected void setLessonsInternal(Set<Lesson> visits) {
+  protected void setLessonsInternal(Set<Lesson> lessons) {
     this.lessons = lessons;
   }
 
   public List<Lesson> getLessons() {
     List<Lesson> sortedLessons = new ArrayList<>(getLessonsInternal());
     PropertyComparator.sort(sortedLessons,
-        new MutableSortDefinition("date", false, false));
+        new MutableSortDefinition("id", false, false));
     return Collections.unmodifiableList(sortedLessons);
   }
 
