@@ -13,7 +13,8 @@
 <div>
   <table border="1" align="center">
     <tr>
-      <th>Name</th>
+      <th>Student</th>
+      <th>Subject</th>
     </tr>
     <tr th:each="lesson : ${lessons}">
       <td th:text="${lesson.student.name}"></td>
