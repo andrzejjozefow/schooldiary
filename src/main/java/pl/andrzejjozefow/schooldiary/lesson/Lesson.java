@@ -14,7 +14,7 @@ import pl.andrzejjozefow.schooldiary.student.Student;
 public class Lesson {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue
   @Column(name = "LESSON_ID")
   private Integer lessonId;
 

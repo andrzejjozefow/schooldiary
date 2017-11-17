@@ -24,14 +24,14 @@ import pl.andrzejjozefow.schooldiary.lesson.Lesson;
 public class Student {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue
   @Column(name = "STUDENT_ID")
   private Integer studentId;
 
   @Column(name = "STUDENT_NAME")
   private String name;
 
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "studentId", fetch = FetchType.EAGER)
+  @OneToMany
   private Set<Lesson> lessons = new LinkedHashSet<>();
 
 
@@ -75,10 +75,10 @@ public class Student {
   }
 
   public List<Lesson> getLessons() {
-    List<Lesson> sortedVisits = new ArrayList<>(getLessonsInternal());
-    PropertyComparator.sort(sortedVisits,
+    List<Lesson> sortedLessons = new ArrayList<>(getLessonsInternal());
+    PropertyComparator.sort(sortedLessons,
         new MutableSortDefinition("date", false, false));
-    return Collections.unmodifiableList(sortedVisits);
+    return Collections.unmodifiableList(sortedLessons);
   }
 
   public void addLesson(Lesson lesson) {
