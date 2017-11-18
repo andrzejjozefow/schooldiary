@@ -15,13 +15,10 @@ import javax.persistence.OneToMany;
 import org.springframework.beans.support.MutableSortDefinition;
 import org.springframework.beans.support.PropertyComparator;
 import pl.andrzejjozefow.schooldiary.lesson.Lesson;
+import pl.andrzejjozefow.schooldiary.model.BaseEntity;
 
 @Entity
-public class Student {
-
-  @Id
-  @GeneratedValue
-  private Integer id;
+public class Student extends BaseEntity{
 
   private String name;
 
@@ -29,15 +26,6 @@ public class Student {
   @JoinColumn
   private Set<Lesson> lessons = new LinkedHashSet<>();
 
-
-
-  public Integer getId() {
-    return id;
-  }
-
-  public void setId(Integer studentId) {
-    this.id = studentId;
-  }
 
   public String getName() {
     return name;
