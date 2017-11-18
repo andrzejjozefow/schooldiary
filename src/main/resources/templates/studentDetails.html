@@ -29,6 +29,9 @@
     <td th:text="${lesson?.subject}"/>
   </tr>
 </table>
+<div>
+  <h2 align="left"><a href="createOrUpdateLessonForm.html" th:href="@{'/students/' + ${student.id} + '/lessons/new'}">Add new lesson</a></h2>
+</div>
 
 </body>
 
