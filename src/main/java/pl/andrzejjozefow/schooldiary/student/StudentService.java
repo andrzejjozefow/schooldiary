@@ -28,7 +28,7 @@ public class StudentService {
     return students;
   }
 
-  public Student findById (Student student){
+  public Student findById(Student student) {
     return studentRepository.findById(student.getId());
   }
 }

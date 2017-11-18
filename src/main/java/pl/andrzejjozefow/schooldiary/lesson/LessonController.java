@@ -1,19 +1,14 @@
 package pl.andrzejjozefow.schooldiary.lesson;
 
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 import pl.andrzejjozefow.schooldiary.student.Student;
 import pl.andrzejjozefow.schooldiary.student.StudentService;
 
@@ -41,13 +36,15 @@ public class LessonController {
   }
 
   @RequestMapping(value = "students/{studentId}/lessons/new", method = RequestMethod.GET)
-  public String initNewVisitForm(@PathVariable("studentId") Student student, Map<String, Object> model) {
+  public String initNewVisitForm(@PathVariable("studentId") Student student,
+      Map<String, Object> model) {
     loadStudentWithLesson(student, new Lesson(), model);
     return "createOrUpdateLessonForm";
   }
 
   @RequestMapping(value = "students/{studentId}/lessons/new", method = RequestMethod.POST)
-  public String processNewVisitForm(@PathVariable("studentId") Student student, @Valid Lesson lesson, BindingResult result,Map<String, Object> model ) {
+  public String processNewVisitForm(@PathVariable("studentId") Student student,
+      @Valid Lesson lesson, BindingResult result, Map<String, Object> model) {
     loadStudentWithLesson(student, lesson, model);
     if (result.hasErrors()) {
       return "createOrUpdateLessonForm";
