@@ -6,49 +6,23 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import org.springframework.beans.support.MutableSortDefinition;
 import org.springframework.beans.support.PropertyComparator;
 import pl.andrzejjozefow.schooldiary.lesson.Lesson;
+import pl.andrzejjozefow.schooldiary.model.BaseEntity;
 
 @Entity
-public class Student {
-
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer id;
+public class Student extends BaseEntity {
 
   private String name;
 
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "student", fetch = FetchType.EAGER)
+  @OneToMany
+  @JoinColumn
   private Set<Lesson> lessons = new LinkedHashSet<>();
 
-
-  public Student() {
-  }
-
-  public Student(String name) {
-    this.name = name;
-  }
-
-  public Student(Integer id, String name) {
-    this.id = id;
-    this.name = name;
-  }
-
-  public Integer getId() {
-    return id;
-  }
-
-  public void setId(Integer id) {
-    this.id = id;
-  }
 
   public String getName() {
     return name;
@@ -65,20 +39,20 @@ public class Student {
     return this.lessons;
   }
 
-  protected void setLessonsInternal(Set<Lesson> visits) {
+  protected void setLessonsInternal(Set<Lesson> lessons) {
     this.lessons = lessons;
   }
 
   public List<Lesson> getLessons() {
-    List<Lesson> sortedVisits = new ArrayList<>(getLessonsInternal());
-    PropertyComparator.sort(sortedVisits,
-        new MutableSortDefinition("date", false, false));
-    return Collections.unmodifiableList(sortedVisits);
+    List<Lesson> sortedLessons = new ArrayList<>(getLessonsInternal());
+    PropertyComparator.sort(sortedLessons,
+        new MutableSortDefinition("id", false, false));
+    return Collections.unmodifiableList(sortedLessons);
   }
 
   public void addLesson(Lesson lesson) {
     getLessonsInternal().add(lesson);
-    lesson.getStudent().getId();
+    lesson.setStudent(this);
   }
 
 }

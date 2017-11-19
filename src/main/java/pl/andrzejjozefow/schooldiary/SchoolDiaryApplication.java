@@ -16,20 +16,5 @@ public class SchoolDiaryApplication {
   public static void main(String[] args) {
     SpringApplication.run(SchoolDiaryApplication.class, args);
   }
-
-  @PostConstruct
-  public void initDatabase(){
-    studentRepository.save(new Student("Paul"));
-    studentRepository.save(new Student("Ringo"));
-    studentRepository.save(new Student("John"));
-
-    Iterable<Student> students = studentRepository.findAll();
-
-    for(Student singleStudent : students){
-      System.out.println(singleStudent);
-    }
-
-    System.out.println("Students: " + students);
-  }
 }
 

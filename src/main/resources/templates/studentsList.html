@@ -11,17 +11,21 @@
 </div>
 
 <div>
-  <table border="1" align="center">
+  <table align="center">
     <tr>
       <th>Name</th>
     </tr>
     <tr th:each="student : ${student}">
-      <td th:text="${student.name}"></td>
+      <td>
+        <a href="studentDetails.html" th:href="@{'/students/' + ${student.id}}">
+          <div th:text="${student.name}"></div>
+        </a>
+      </td>
     </tr>
   </table>
 </div>
 <div>
-  <h2 align="center"><a href="./new">Add new student</a></h2>
+  <h2 align="center"><a href="/students/new">Add new student</a></h2>
 </div>
 
 </body>
