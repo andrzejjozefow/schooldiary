@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import pl.andrzejjozefow.schooldiary.student.Student;
 import pl.andrzejjozefow.schooldiary.student.StudentService;
+import pl.andrzejjozefow.schooldiary.student.StudentViewDTO;
 
 @Controller
 public class LessonController {
@@ -30,9 +31,11 @@ public class LessonController {
 
   public void loadStudentWithLesson(Student student, Lesson lesson, Map<String, Object> model) {
     student = studentService.findById(student);
-    model.put("student", student);
+    StudentViewDTO studentViewDTO = StudentViewDTO.mapFromStudentEntity(student);
+    LessonViewDTO lessonViewDTO = LessonViewDTO.mapFromLessonEntity(lesson);
+    model.put("student", studentViewDTO);
     student.addLesson(lesson);
-    model.put("lesson", lesson);
+    model.put("lesson", lessonViewDTO);
   }
 
   @RequestMapping(value = "students/{studentId}/lessons/new", method = RequestMethod.GET)

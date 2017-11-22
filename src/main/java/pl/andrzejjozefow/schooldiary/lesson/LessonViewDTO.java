@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 
 public class LessonViewDTO {
 
+    Integer id;
+
     StudentViewDTO studentViewDTO;
 
     String subject;
@@ -40,5 +42,13 @@ public class LessonViewDTO {
     public void setSubject(String subject) {
 
         this.subject = subject;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

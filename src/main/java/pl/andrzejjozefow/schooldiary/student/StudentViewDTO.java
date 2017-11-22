@@ -8,7 +8,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class StudentViewDTO extends BaseDTO{
+public class StudentViewDTO {
+
+    Integer id;
 
     String name;
 
@@ -40,5 +42,13 @@ public class StudentViewDTO extends BaseDTO{
 
     public void setLessonViewDTOSet(Set<LessonViewDTO> lessonViewDTOSet) {
         this.lessonViewDTOSet = lessonViewDTOSet;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }
