@@ -1,5 +1,6 @@
 package pl.andrzejjozefow.schooldiary.student;
 
+import java.util.List;
 import java.util.Map;
 import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -9,7 +10,6 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class StudentController {
@@ -44,16 +44,16 @@ public class StudentController {
 
   @RequestMapping("/students")
   public String students(Map<String, Object> model) {
-    model.put("student", studentService.getAllStudents());
-
+    List<StudentListViewDTO> studentsListViewDTO = StudentListViewDTO.from(studentService.getAllStudents());
+    model.put("student", studentsListViewDTO);
     return "studentsList";
   }
 
   @RequestMapping("/students/{studentId}")
-  public ModelAndView showOwner(@PathVariable("studentId") Student student) {
-    ModelAndView mav = new ModelAndView("studentDetails");
-    mav.addObject(this.studentService.findById(student));
-    return mav;
+  public String showStudent(@PathVariable("studentId") Integer studentId, Map<String, Object> model) {
+    Student student = studentService.getStudent(studentId);
+    model.put("student", student);
+    return "studentDetails";
   }
 
 }

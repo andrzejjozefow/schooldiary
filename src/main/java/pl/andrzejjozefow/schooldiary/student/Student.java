@@ -6,7 +6,9 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import org.springframework.beans.support.MutableSortDefinition;
@@ -19,10 +21,15 @@ public class Student extends BaseEntity {
 
   private String name;
 
-  @OneToMany
-  @JoinColumn
+  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "student")
   private Set<Lesson> lessons = new LinkedHashSet<>();
 
+  public Student() {
+  }
+
+  public Student(String name) {
+    this.name = name;
+  }
 
   public String getName() {
     return name;
@@ -43,11 +50,12 @@ public class Student extends BaseEntity {
     this.lessons = lessons;
   }
 
-  public List<Lesson> getLessons() {
-    List<Lesson> sortedLessons = new ArrayList<>(getLessonsInternal());
-    PropertyComparator.sort(sortedLessons,
-        new MutableSortDefinition("id", false, false));
-    return Collections.unmodifiableList(sortedLessons);
+  public Set<Lesson> getLessons() {
+    return lessons;
+//    List<Lesson> sortedLessons = new ArrayList<>(getLessonsInternal());
+//    PropertyComparator.sort(sortedLessons,
+//        new MutableSortDefinition("id", false, false));
+//    return Collections.unmodifiableList(sortedLessons);
   }
 
   public void addLesson(Lesson lesson) {
