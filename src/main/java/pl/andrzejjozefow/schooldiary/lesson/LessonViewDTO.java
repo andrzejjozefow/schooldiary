@@ -1,9 +1,8 @@
 package pl.andrzejjozefow.schooldiary.lesson;
-
-import pl.andrzejjozefow.schooldiary.student.Student;
 import pl.andrzejjozefow.schooldiary.student.StudentViewDTO;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LessonViewDTO {
@@ -14,15 +13,21 @@ public class LessonViewDTO {
 
     String subject;
 
-    public LessonViewDTO(Integer id, String subject, Student student) {
+
+    public LessonViewDTO(Integer id, StudentViewDTO studentViewDTO, String subject) {
+
+        this.id = id;
+        this.studentViewDTO = studentViewDTO;
+        this.subject = subject;
     }
+
 
     public static LessonViewDTO mapFromLessonEntity(Lesson lesson) {
-        return new LessonViewDTO(lesson.getId(), lesson.getSubject(), lesson.getStudent());
+        return new LessonViewDTO(lesson.getId(), StudentViewDTO.mapFromStudentEntity(lesson.getStudent()), lesson.getSubject());
     }
 
-    public static List<LessonViewDTO> mapFromLessonsEntities(List<Lesson> lessons) {
-        return lessons.stream().map((lesson) -> mapFromLessonEntity(lesson)).collect(Collectors.toList());
+    public static Set<LessonViewDTO> mapFromLessonsEntities(List<Lesson> lessons) {
+        return lessons.stream().map((lesson) -> mapFromLessonEntity(lesson)).collect(Collectors.toSet());
     }
 
     public StudentViewDTO getStudentViewDTO() {

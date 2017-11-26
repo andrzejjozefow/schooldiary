@@ -1,5 +1,7 @@
 package pl.andrzejjozefow.schooldiary.lesson;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -34,19 +36,19 @@ public class LessonController {
     StudentViewDTO studentViewDTO = StudentViewDTO.mapFromStudentEntity(student);
     LessonViewDTO lessonViewDTO = LessonViewDTO.mapFromLessonEntity(lesson);
     model.put("student", studentViewDTO);
-    student.addLesson(lesson);
+    studentViewDTO.addLesson(lessonViewDTO);
     model.put("lesson", lessonViewDTO);
   }
 
   @RequestMapping(value = "students/{studentId}/lessons/new", method = RequestMethod.GET)
-  public String initNewVisitForm(@PathVariable("studentId") Student student,
+  public String initNewLessonForm(@PathVariable("studentId") Student student,
       Map<String, Object> model) {
     loadStudentWithLesson(student, new Lesson(), model);
     return "createOrUpdateLessonForm";
   }
 
   @RequestMapping(value = "students/{studentId}/lessons/new", method = RequestMethod.POST)
-  public String processNewVisitForm(@PathVariable("studentId") Student student,
+  public String processNewLessonForm(@PathVariable("studentId") Student student,
       @Valid Lesson lesson, BindingResult result, Map<String, Object> model) {
     loadStudentWithLesson(student, lesson, model);
     if (result.hasErrors()) {
@@ -59,7 +61,9 @@ public class LessonController {
 
   @RequestMapping("/lessons")
   public String lessons(Map<String, Object> model) {
-    model.put("lessons", lessonService.getAllLessons());
+    List<LessonViewDTO> lessonViewDTOList = new ArrayList<>();
+    lessonViewDTOList.addAll(LessonViewDTO.mapFromLessonsEntities(lessonService.getAllLessons())) ;
+    model.put("lessons", lessonViewDTOList);
 
     return "lessonList";
   }

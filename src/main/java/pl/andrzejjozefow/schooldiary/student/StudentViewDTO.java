@@ -1,11 +1,12 @@
 package pl.andrzejjozefow.schooldiary.student;
 
+import org.springframework.beans.support.MutableSortDefinition;
+import org.springframework.beans.support.PropertyComparator;
 import pl.andrzejjozefow.schooldiary.lesson.Lesson;
 import pl.andrzejjozefow.schooldiary.lesson.LessonViewDTO;
 import pl.andrzejjozefow.schooldiary.model.BaseDTO;
 
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class StudentViewDTO {
@@ -16,16 +17,29 @@ public class StudentViewDTO {
 
     Set<LessonViewDTO> lessonViewDTOSet;
 
-    public StudentViewDTO(Integer id, String name, List<Lesson> lessons) {
+
+    public StudentViewDTO(Integer id, String name, Set<LessonViewDTO> lessonViewDTOSet) {
+
+        this.id = id;
+        this.name = name;
+        this.lessonViewDTOSet = lessonViewDTOSet;
 
     }
 
     public static StudentViewDTO mapFromStudentEntity(Student student) {
-        return new StudentViewDTO(student.getId(), student.getName(), student.getLessons());
+        return new StudentViewDTO(student.getId(), student.getName(), LessonViewDTO.mapFromLessonsEntities(student.getLessons()));
     }
 
     public static List<StudentViewDTO> mapFromStudentsEntities(List<Student> students) {
         return students.stream().map((student) -> mapFromStudentEntity(student)).collect(Collectors.toList());
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -36,19 +50,29 @@ public class StudentViewDTO {
         this.name = name;
     }
 
-    public Set<LessonViewDTO> getLessonViewDTOSet() {
-        return lessonViewDTOSet;
+    protected Set<LessonViewDTO> getLessonsInternal() {
+        if (this.lessonViewDTOSet == null) {
+            this.lessonViewDTOSet = new HashSet<>();
+        }
+        return this.lessonViewDTOSet;
     }
 
-    public void setLessonViewDTOSet(Set<LessonViewDTO> lessonViewDTOSet) {
+    protected void setLessonsInternal(Set<LessonViewDTO> lessonViewDTOSet) {
+
         this.lessonViewDTOSet = lessonViewDTOSet;
     }
 
-    public Integer getId() {
-        return id;
+    public List<LessonViewDTO> getLessons() {
+        List<LessonViewDTO> sortedLessons = new ArrayList<>(getLessonsInternal());
+        PropertyComparator.sort(sortedLessons,
+                new MutableSortDefinition("id", false, false));
+        return Collections.unmodifiableList(sortedLessons);
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void addLesson(LessonViewDTO lessonViewDTO) {
+        getLessonsInternal().add(lessonViewDTO);
+        lessonViewDTO.setStudentViewDTO(this);
     }
+
+
 }

@@ -28,7 +28,8 @@ public class StudentController {
   @RequestMapping(value = "/students/new", method = RequestMethod.GET)
   public String initCreationForm(Map<String, Object> model) {
     Student student = new Student();
-    model.put("student", student);
+    StudentViewDTO studentViewDTO = StudentViewDTO.mapFromStudentEntity(student);
+    model.put("student", studentViewDTO);
     return "createOrUpdateStudentForm";
   }
 
@@ -50,7 +51,7 @@ public class StudentController {
   }
 
   @RequestMapping("/students/{studentId}")
-  public ModelAndView showOwner(@PathVariable("studentId") Student student) {
+  public ModelAndView showStudent(@PathVariable("studentId") Student student) {
     ModelAndView mav = new ModelAndView("studentDetails");
     mav.addObject(this.studentService.findById(student));
     return mav;
