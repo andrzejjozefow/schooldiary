@@ -1,15 +1,19 @@
 package pl.andrzejjozefow.schooldiary.lesson;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.validator.constraints.NotEmpty;
 import pl.andrzejjozefow.schooldiary.model.BaseEntity;
 import pl.andrzejjozefow.schooldiary.student.Student;
 
+
 @Entity
+@Getter @Setter
 public class Lesson extends BaseEntity {
+
 
   @ManyToOne
   @JoinColumn(name = "student_id")
@@ -17,21 +21,5 @@ public class Lesson extends BaseEntity {
 
   @NotEmpty
   private String subject;
-
-
-  public String getSubject() {
-    return subject;
-  }
-
-  public void setSubject(String subject) {
-    this.subject = subject;
-  }
-
-  public void setStudent(Student student) {
-    this.student = student;
-  }
-
-  public Student getStudent() {
-    return student;
-  }
+  
 }

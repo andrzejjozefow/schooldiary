@@ -31,9 +31,6 @@ public class SchoolDiaryApplication {
     lesson.setSubject("Gitara");
     lesson.setStudent(jakub);
     lessonRepository.save(lesson);
-    Student jakubFromDb = studentRepository.findOne(jakub.getId());
-    System.out.println("Jakub from db:" + jakubFromDb);
-    System.out.println("DUPA");
     studentRepository.save(new Student("Andrzej"));
   }
 

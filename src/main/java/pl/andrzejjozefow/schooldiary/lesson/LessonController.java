@@ -23,8 +23,6 @@ public class LessonController {
     this.studentService = studentService;
   }
 
-
-
   public void loadStudentWithLesson(Student student, Lesson lesson, Map<String, Object> model) {
     model.put("student", student);
     student.addLesson(lesson);
