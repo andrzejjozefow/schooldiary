@@ -1,37 +1,85 @@
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org">
+<style>
+h1 {
+    text-align: center;
+    text-transform: uppercase;
+    color: #4CAF50;
+    }
+p    {color: red;}
 
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+</style>
 <body>
 
-
-<h2>Student Information</h2>
-
+<h1>Student Information</h1>
 
 <table th:object="${student}">
   <tr>
-    <th>Name</th>
-    <td><b th:text="*{name}"></b></td>
+    <td>Name:</td>
+    <td th:text="*{firstName}"/>
+  </tr>
+  <tr>
+    <td>Surname:   </td>
+    <td th:text="*{lastName}" />
+  </tr>
+  <tr>
+    <td>Birth date:   </td>
+    <td th:text="*{birthDate}" />
   </tr>
 </table>
 
-
 <br />
 <br />
 <br />
-<h2>Lessons</h2>
-
 <table>
   <tr>
+    <td>
+      <h2>Lessons</h2>
+    </td>
+    <td>
+      <a href="createOrUpdateLessonForm.html" th:href="@{'/students/' + ${student.id} + '/lessons/new'}">
+        <button class="button">ADD NEW LESSON</button>
+      </a>
+    </td>
+  </tr>
+</table>
+
+<table border="1">
+  <tr>
     <th>Subject</th>
+    <th>Date</th>
   </tr>
   <tr th:each="lesson : ${student.lessons}">
     <td th:text="${lesson?.subject}"/>
   </tr>
 </table>
-<div>
-  <h2 align="left"><a href="createOrUpdateLessonForm.html" th:href="@{'/students/' + ${student.id} + '/lessons/new'}">Add new lesson</a></h2>
-</div>
 
 </body>
 

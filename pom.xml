@@ -9,7 +9,7 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>schooldiary</name>
+  <firstName>schooldiary</firstName>
   <description>Demo project for Spring Boot</description>
 
   <parent>

@@ -3,30 +3,78 @@
 <head>
   <title>Students</title>
 </head>
+<style>
+h1 {
+    text-align: center;
+    text-transform: uppercase;
+    color: #4CAF50;
+    }
+p    {color: red;}
 
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+</style>
 <body>
 
 <div>
-  <h1 align="center">Welcome to students page</h1>
+  <h1 align="center">students list</h1>
 </div>
 
+<a href="/students/new" class="button">new student</a>
 <div>
   <table align="center">
     <tr>
-      <th>Name</th>
+      <th>id</th>
+      <th>firstname</th>
+      <th>lastname</th>
+      <th>birth date</th>
+      <th>e-mail</th>
+      <th>phone</th>
     </tr>
     <tr th:each="student : ${student}">
       <td>
         <a href="studentDetails.html" th:href="@{'/students/' + ${student.id}}">
-          <div th:text="${student.name}"></div>
+          <div th:text="${student.id}"></div>
+        </a>
+      </td>
+      <td>
+        <a href="studentDetails.html" th:href="@{'/students/' + ${student.id}}">
+          <div th:text="${student.studentFirstName}"></div>
+        </a>
+      </td>
+      <td>
+        <a href="studentDetails.html" th:href="@{'/students/' + ${student.id}}">
+          <div th:text="${student.studentLastName}"></div>
         </a>
       </td>
     </tr>
   </table>
 </div>
-<div>
-  <h2 align="center"><a href="/students/new">Add new student</a></h2>
-</div>
+
 
 </body>
 </html>

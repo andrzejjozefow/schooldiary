@@ -1,5 +1,7 @@
 package pl.andrzejjozefow.schooldiary;
 
+
+import java.util.Date;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -24,14 +26,15 @@ public class SchoolDiaryApplication {
 
   @PostConstruct
   public void initData() {
-    Student jakub = new Student("Jakub");
+    Student jakub = new Student("Jakub","Spręga",  new Date(1986,8,30));
     studentRepository.save(jakub);
 
     Lesson lesson = new Lesson();
     lesson.setSubject("Gitara");
     lesson.setStudent(jakub);
     lessonRepository.save(lesson);
-    studentRepository.save(new Student("Andrzej"));
+    studentRepository.save(new Student("Andrzej", "Józefów", new Date(1986, 10, 5)));
+
   }
 
 }

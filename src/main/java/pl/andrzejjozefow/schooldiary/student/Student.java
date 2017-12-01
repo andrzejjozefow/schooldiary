@@ -1,33 +1,44 @@
 package pl.andrzejjozefow.schooldiary.student;
 
 
+
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
-import lombok.Getter;
-import lombok.Setter;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import pl.andrzejjozefow.schooldiary.lesson.Lesson;
 import pl.andrzejjozefow.schooldiary.model.BaseEntity;
 
 @Entity
-@Getter @Setter
+@Data
+@NoArgsConstructor
 public class Student extends BaseEntity {
 
-  private String name;
+  private String firstName;
+  private String lastName;
 
-  //podmieniłem typ z Set na List żeby lekcje wyświetlały się w kolejności (do sprawdzenia)
+  @Temporal(TemporalType.DATE)
+  @DateTimeFormat(pattern = "yyyy/MM/dd")
+  private Date birthDate;
+
+  //podmieniłem typ z "Set" na "List" żeby lekcje wyświetlały się w kolejności (do sprawdzenia czy nie buguje zapytań)
   @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "student")
   private List<Lesson> lessons = new ArrayList<>();
 
-  public Student() {
-  }
-
-  public Student(String name) {
-    this.name = name;
+  public Student(String firstName, String lastName, Date birthDate) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.birthDate = birthDate;
   }
 
   public List<Lesson> getLessons() {

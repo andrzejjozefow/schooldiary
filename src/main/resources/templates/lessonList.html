@@ -17,7 +17,7 @@
       <th>Subject</th>
     </tr>
     <tr th:each="lesson : ${lessons}">
-      <td th:text="${lesson.student.name}"></td>
+      <td th:text="${lesson.student.firstName}"></td>
       <td th:text="${lesson.subject}"></td>
     </tr>
   </table>

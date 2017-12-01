@@ -7,11 +7,13 @@ import pl.andrzejjozefow.schooldiary.model.BaseDTO;
 @Getter
 public class StudentListViewDTO extends BaseDTO {
 
-  private final String name;
+  private final String studentFirstName;
+  private final String studentLastName;
 
   public StudentListViewDTO(final Student student) {
     super(student.getId());
-    this.name = student.getName();
+    this.studentFirstName = student.getFirstName();
+    this.studentLastName = student.getLastName();
   }
 
   public static List<StudentListViewDTO> from(final List<Student> students){
