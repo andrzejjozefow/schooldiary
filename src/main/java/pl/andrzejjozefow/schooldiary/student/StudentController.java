@@ -10,14 +10,19 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import pl.andrzejjozefow.schooldiary.student.ContactDetails.ContactDetails;
+import pl.andrzejjozefow.schooldiary.student.ContactDetails.ContactDetailsService;
 
 @Controller
 public class StudentController {
 
   private final StudentService studentService;
+  private final ContactDetailsService contactDetailsService;
 
-  public StudentController(StudentService studentService) {
+  public StudentController(StudentService studentService,
+      ContactDetailsService contactDetailsService) {
     this.studentService = studentService;
+    this.contactDetailsService = contactDetailsService;
   }
 
   @InitBinder
@@ -25,27 +30,48 @@ public class StudentController {
     dataBinder.setDisallowedFields("id");
   }
 
+//  @RequestMapping(value = "/students/new", method = RequestMethod.GET)
+//  public String initCreationForm(Map<String, Object> model) {
+//    Student student = new Student();
+//    model.put("student", student);
+//    return "createOrUpdateStudentForm";
+//  }
+//
+//  @RequestMapping(value = "/students/new", method = RequestMethod.POST)
+//  public String processCreationForm(@Valid Student student, BindingResult result) {
+//    if (result.hasErrors()) {
+//      return "createOrUpdateStudentForm";
+//    } else {
+//      this.studentService.addStudent(student);
+//      return "redirect:/students/";
+//    }
+//  }
+
   @RequestMapping(value = "/students/new", method = RequestMethod.GET)
   public String initCreationForm(Map<String, Object> model) {
     Student student = new Student();
+    ContactDetails contactDetails = new ContactDetails();
     model.put("student", student);
+    model.put("contactdetails", contactDetails);
     return "createOrUpdateStudentForm";
   }
 
   @RequestMapping(value = "/students/new", method = RequestMethod.POST)
-  public String processCreationForm(@Valid Student student, BindingResult result) {
+  public String processCreationForm(@Valid Student student, ContactDetails contactDetails, BindingResult result) {
     if (result.hasErrors()) {
       return "createOrUpdateStudentForm";
     } else {
       this.studentService.addStudent(student);
+      contactDetails.setStudent(student);
+      this.contactDetailsService.addContactDetails(contactDetails);
       return "redirect:/students/";
     }
   }
 
   @RequestMapping("/students")
   public String students(Map<String, Object> model) {
-    List<StudentListViewDTO> studentsListViewDTO = StudentListViewDTO.from(studentService.getAllStudents());
-    model.put("student", studentsListViewDTO);
+    List<Student> students = studentService.getAllStudents();
+    model.put("student", students);
     return "studentsList";
   }
 

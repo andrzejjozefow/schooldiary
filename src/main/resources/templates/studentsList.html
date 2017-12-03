@@ -63,12 +63,27 @@ tr:nth-child(even) {
       </td>
       <td>
         <a href="studentDetails.html" th:href="@{'/students/' + ${student.id}}">
-          <div th:text="${student.studentFirstName}"></div>
+          <div th:text="${student.firstName}"></div>
         </a>
       </td>
       <td>
         <a href="studentDetails.html" th:href="@{'/students/' + ${student.id}}">
-          <div th:text="${student.studentLastName}"></div>
+          <div th:text="${student.lastName}"></div>
+        </a>
+      </td>
+      <td>
+        <a href="studentDetails.html" th:href="@{'/students/' + ${student.id}}">
+          <div th:text="${student.birthDate}"></div>
+        </a>
+      </td>
+      <td>
+        <a href="studentDetails.html" th:href="@{'/students/' + ${student.id}}">
+          <div th:text="${student.ContactDetails.email}"></div>
+        </a>
+      </td>
+      <td>
+        <a href="studentDetails.html" th:href="@{'/students/' + ${student.id}}">
+          <div th:text="${student.ContactDetails.phoneNumber}"></div>
         </a>
       </td>
     </tr>

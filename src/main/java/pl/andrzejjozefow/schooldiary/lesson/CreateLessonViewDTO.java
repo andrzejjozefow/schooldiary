@@ -1,9 +1,11 @@
 package pl.andrzejjozefow.schooldiary.lesson;
 
 
+import lombok.Data;
 import lombok.Getter;
 import pl.andrzejjozefow.schooldiary.student.Student;
 
+@Data
 @Getter
 public class CreateLessonViewDTO {
 

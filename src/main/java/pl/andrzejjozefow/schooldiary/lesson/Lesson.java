@@ -1,6 +1,5 @@
 package pl.andrzejjozefow.schooldiary.lesson;
 
-import java.sql.Date;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -13,11 +12,10 @@ import pl.andrzejjozefow.schooldiary.model.BaseEntity;
 import pl.andrzejjozefow.schooldiary.student.Student;
 
 
-@Entity
-@Data
+@Getter @Setter
 @NoArgsConstructor
+@Entity
 public class Lesson extends BaseEntity {
-
 
   @ManyToOne
   @JoinColumn(name = "student_id")
@@ -26,5 +24,4 @@ public class Lesson extends BaseEntity {
   @NotEmpty
   private String subject;
 
-  
 }

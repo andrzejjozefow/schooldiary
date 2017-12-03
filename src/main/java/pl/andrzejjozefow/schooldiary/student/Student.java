@@ -3,46 +3,57 @@ package pl.andrzejjozefow.schooldiary.student;
 
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
+import pl.andrzejjozefow.schooldiary.student.ContactDetails.ContactDetails;
 import pl.andrzejjozefow.schooldiary.lesson.Lesson;
 import pl.andrzejjozefow.schooldiary.model.BaseEntity;
 
-@Entity
-@Data
+
+@Getter @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Entity
 public class Student extends BaseEntity {
 
   private String firstName;
+
   private String lastName;
 
   @Temporal(TemporalType.DATE)
   @DateTimeFormat(pattern = "yyyy/MM/dd")
   private Date birthDate;
 
-  //podmieniłem typ z "Set" na "List" żeby lekcje wyświetlały się w kolejności (do sprawdzenia czy nie buguje zapytań)
-  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "student")
-  private List<Lesson> lessons = new ArrayList<>();
+  @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "student" )
+  private ContactDetails contactDetails;
 
-  public Student(String firstName, String lastName, Date birthDate) {
+
+  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "student")
+  private Set<Lesson> lessons = new LinkedHashSet<>();
+
+  public Student(String firstName, String lastName) {
     this.firstName = firstName;
     this.lastName = lastName;
-    this.birthDate = birthDate;
+    this.birthDate = new Date();
   }
 
-  public List<Lesson> getLessons() {
-    Collections.reverse(lessons);
+  public Set<Lesson> getLessons() {
     return lessons;
   }
 

@@ -40,19 +40,24 @@ tr:nth-child(even) {
 
 <h1>Student Information</h1>
 
-<table th:object="${student}">
+<table>
   <tr>
     <td>Name:</td>
-    <td th:text="*{firstName}"/>
+    <td th:text="${student.firstName}"/>
   </tr>
   <tr>
     <td>Surname:   </td>
-    <td th:text="*{lastName}" />
+    <td th:text="${student.lastName}" />
   </tr>
   <tr>
     <td>Birth date:   </td>
-    <td th:text="*{birthDate}" />
+    <td th:text="${student.birthDate}" />
   </tr>
+  <tr>
+    <td>Email:   </td>
+    <td th:text="${student.ContactDetails.email}" />
+  </tr>
+
 </table>
 
 <br />
