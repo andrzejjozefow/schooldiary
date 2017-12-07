@@ -2,11 +2,9 @@ package pl.andrzejjozefow.schooldiary.student;
 
 
 
-import java.util.ArrayList;
-import java.util.Collections;
+
 import java.util.Date;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -16,7 +14,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -46,6 +43,7 @@ public class Student extends BaseEntity {
 
   @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "student")
   private Set<Lesson> lessons = new LinkedHashSet<>();
+
 
   public Student(String firstName, String lastName) {
     this.firstName = firstName;

@@ -1,5 +1,6 @@
 package pl.andrzejjozefow.schooldiary.lesson;
 
+import java.util.Date;
 import java.util.Map;
 import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -45,6 +46,7 @@ public class LessonController {
       return "createOrUpdateLessonForm";
     } else {
       lesson.setStudent(student);
+      lesson.setDate(new Date());
       this.lessonService.addLesson(lesson);
       return "redirect:/students/{studentId}";
     }

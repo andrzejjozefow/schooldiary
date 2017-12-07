@@ -1,5 +1,6 @@
 package pl.andrzejjozefow.schooldiary.lesson;
 
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -23,5 +24,7 @@ public class Lesson extends BaseEntity {
 
   @NotEmpty
   private String subject;
+
+  private Date date;
 
 }

@@ -43,6 +43,7 @@ public class SchoolDiaryApplication {
 
     Lesson lesson = new Lesson();
     lesson.setSubject("Gitara");
+    lesson.setDate(new Date());
     lesson.setStudent(jakub);
     lessonRepository.save(lesson);
     //studentRepository.save(new Student("Andrzej", "Józefów"));

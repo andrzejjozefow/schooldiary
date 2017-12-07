@@ -30,22 +30,7 @@ public class StudentController {
     dataBinder.setDisallowedFields("id");
   }
 
-//  @RequestMapping(value = "/students/new", method = RequestMethod.GET)
-//  public String initCreationForm(Map<String, Object> model) {
-//    Student student = new Student();
-//    model.put("student", student);
-//    return "createOrUpdateStudentForm";
-//  }
-//
-//  @RequestMapping(value = "/students/new", method = RequestMethod.POST)
-//  public String processCreationForm(@Valid Student student, BindingResult result) {
-//    if (result.hasErrors()) {
-//      return "createOrUpdateStudentForm";
-//    } else {
-//      this.studentService.addStudent(student);
-//      return "redirect:/students/";
-//    }
-//  }
+
 
   @RequestMapping(value = "/students/new", method = RequestMethod.GET)
   public String initCreationForm(Map<String, Object> model) {
@@ -69,7 +54,7 @@ public class StudentController {
   }
 
   @RequestMapping("/students")
-  public String students(Map<String, Object> model) {
+  public String showStudents(Map<String, Object> model) {
     List<Student> students = studentService.getAllStudents();
     model.put("student", students);
     return "studentsList";

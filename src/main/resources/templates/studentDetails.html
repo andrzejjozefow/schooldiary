@@ -83,6 +83,7 @@ tr:nth-child(even) {
   </tr>
   <tr th:each="lesson : ${student.lessons}">
     <td th:text="${lesson?.subject}"/>
+    <td th:text="${lesson?.date}"/>
   </tr>
 </table>
 
