@@ -1,29 +1,20 @@
-<!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <title>Lessons</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
-</head>
-
-<body>
-
-<div>
-  <h1 align="center">Lessons</h1>
-</div>
-
-<div>
-  <table border="1" align="center">
-    <tr>
-      <th>Student</th>
-      <th>Subject</th>
-    </tr>
-    <tr th:each="lesson : ${lessons}">
-      <td th:text="${lesson.student.firstName}"></td>
-      <td th:text="${lesson.subject}"></td>
-    </tr>
-  </table>
-</div>
-
-</body>
+  <head>
+    <title>Lessons</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+  </head>
+  <body>
+    <h1 align="center">Lessons</h1>
+    <table border="1" align="center">
+      <tr>
+        <th>Student</th>
+        <th>Subject</th>
+      </tr>
+      <tr th:each="lesson : ${lessons}">
+        <td th:text="${lesson.student.firstName}"></td>
+        <td th:text="${lesson.subject}"></td>
+      </tr>
+    </table>
+  </body>
 </html>

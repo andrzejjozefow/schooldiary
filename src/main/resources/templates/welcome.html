@@ -1,20 +1,15 @@
-<!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <title>School Diary</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
-</head>
-<body>
-
-  <div>
+  <head>
+    <title>School Diary</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+  </head>
+  <body>
     <h1>Welcome to School Diary</h1>
+  <div align="center">
+    <h2><a href="students/">List of students</a></h2>
+    <h2><a href="students/new">Add new student</a></h2>
+    <h2><a href="lessons/">List of lessons</a></h2>
   </div>
-<div align="center">
-  <h2><a href="students/">List of students</a></h2>
-  <h2><a href="students/new">Add new student</a></h2>
-  <h2><a href="lessons/">List of lessons</a></h2>
-</div>
-
-</body>
+  </body>
 </html>

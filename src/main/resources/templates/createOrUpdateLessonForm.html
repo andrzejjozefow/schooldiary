@@ -1,21 +1,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <title>Add lesson</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
-</head>
-<body>
-
-<h1>
-  <td th:text="${student.firstName} + ' ' + ${student.lastName}"/>
-</h1>
-
-<form th:object="${lesson}" method="post">
-  <input type="text" placeholder="lesson subject" th:field="*{subject}" />
-  <input type="hidden" firstName="student_id" th:value="${student.id}"/>
-  <button algin="left" type="submit" class="button">+</button>
-</form>
-
-</body>
-
+  <head>
+    <title>Add lesson</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+  </head>
+  <body>
+    <h1>
+      <td th:text="${student.firstName} + ' ' + ${student.lastName}"/>
+    </h1>
+    <form th:object="${lesson}" method="post">
+      <input type="text" placeholder="lesson subject" th:field="*{subject}" />
+      <input type="hidden" firstName="student_id" th:value="${student.id}"/>
+      <button algin="left" type="submit" class="button">+</button>
+    </form>
+  </body>
 </html>
