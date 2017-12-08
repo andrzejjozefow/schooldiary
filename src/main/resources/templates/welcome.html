@@ -2,33 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>School Diary</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
 </head>
-<style>
-  h1 {
-    text-transform: uppercase;
-    color: #4CAF50;
-    }
-
-  h2 {
-    text-transform: uppercase;
-    color: #4CAF50;
-  }
-
-  a {
-    color: #4CAF50;
-  }
-
-  a:hover {
-    color: lightgreen;
-
-  }
-</style>
 <body>
 
   <div>
     <h1>Welcome to School Diary</h1>
   </div>
-<div>
+<div align="center">
   <h2><a href="students/">List of students</a></h2>
   <h2><a href="students/new">Add new student</a></h2>
   <h2><a href="lessons/">List of lessons</a></h2>
