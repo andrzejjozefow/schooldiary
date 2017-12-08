@@ -1,4 +1,5 @@
 package pl.andrzejjozefow.schooldiary.student.dto;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.Getter;

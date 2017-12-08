@@ -1,6 +1,5 @@
 package pl.andrzejjozefow.schooldiary.student;
 
-
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -19,7 +18,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import pl.andrzejjozefow.schooldiary.student.ContactDetails.ContactDetails;
 import pl.andrzejjozefow.schooldiary.lesson.Lesson;
 import pl.andrzejjozefow.schooldiary.model.BaseEntity;
-
 
 @Getter
 @Setter
