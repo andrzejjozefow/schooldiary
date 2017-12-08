@@ -1,7 +1,8 @@
-package pl.andrzejjozefow.schooldiary.student;
+package pl.andrzejjozefow.schooldiary.student.dto;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.Getter;
+import pl.andrzejjozefow.schooldiary.student.Student;
 
 @Getter
 public class StudentListViewDTO {

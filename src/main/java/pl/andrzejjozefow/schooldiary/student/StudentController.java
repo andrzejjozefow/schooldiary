@@ -1,6 +1,5 @@
 package pl.andrzejjozefow.schooldiary.student;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.validation.Valid;
@@ -13,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import pl.andrzejjozefow.schooldiary.student.ContactDetails.ContactDetails;
 import pl.andrzejjozefow.schooldiary.student.ContactDetails.ContactDetailsService;
+import pl.andrzejjozefow.schooldiary.student.dto.StudentDetailsViewDTO;
+import pl.andrzejjozefow.schooldiary.student.dto.StudentListViewDTO;
 
 @Controller
 public class StudentController {
@@ -63,7 +64,8 @@ public class StudentController {
   @RequestMapping("/students/{studentId}")
   public String showStudent(@PathVariable("studentId") Integer studentId, Map<String, Object> model) {
     Student student = studentService.getStudent(studentId);
-    model.put("student", student);
+    StudentDetailsViewDTO studentDetailsViewDTO = new StudentDetailsViewDTO(student);
+    model.put("student", studentDetailsViewDTO);
     return "studentDetails";
   }
 }
