@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -33,5 +32,4 @@ public class ContactDetails extends BaseEntity {
   private String zipCode;
 
   private String country;
-
 }

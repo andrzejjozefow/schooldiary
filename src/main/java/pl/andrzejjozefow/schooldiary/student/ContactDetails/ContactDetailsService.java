@@ -13,11 +13,11 @@ public class ContactDetailsService {
     this.contactDetailsRepository = contactDetailsRepository;
   }
 
-  public void addContactDetails(ContactDetails contactDetails){
+  public void addContactDetails(ContactDetails contactDetails) {
     contactDetailsRepository.save(contactDetails);
   }
 
-  public ContactDetails getContactDetails(Integer id){
+  public ContactDetails getContactDetails(Integer id) {
     return contactDetailsRepository.findOne(id);
   }
 

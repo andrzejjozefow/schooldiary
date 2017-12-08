@@ -43,7 +43,8 @@ public class StudentController {
   }
 
   @RequestMapping(value = "/students/new", method = RequestMethod.POST)
-  public String processCreationForm(@Valid Student student, ContactDetails contactDetails, BindingResult result) {
+  public String processCreationForm(@Valid Student student, ContactDetails contactDetails,
+      BindingResult result) {
     if (result.hasErrors()) {
       return "/student/createOrUpdateStudentForm";
     } else {
@@ -63,12 +64,13 @@ public class StudentController {
   }
 
   @RequestMapping("/students/{studentId}")
-  public String showStudent(@PathVariable("studentId") Integer studentId, Map<String, Object> model) {
+  public String showStudent(@PathVariable("studentId") Integer studentId,
+      Map<String, Object> model) {
     Optional<Student> student = Optional.ofNullable(studentService.getStudent(studentId));
-    if (student.isPresent()){
-    StudentDetailsViewDTO studentDetailsViewDTO = new StudentDetailsViewDTO(student.get());
-    model.put("student", studentDetailsViewDTO);
-    return "/student/studentDetails";
+    if (student.isPresent()) {
+      StudentDetailsViewDTO studentDetailsViewDTO = new StudentDetailsViewDTO(student.get());
+      model.put("student", studentDetailsViewDTO);
+      return "/student/studentDetails";
     } else {
       return "welcome";
     }

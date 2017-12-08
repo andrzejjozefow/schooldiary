@@ -1,6 +1,5 @@
 package pl.andrzejjozefow.schooldiary.lesson;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import pl.andrzejjozefow.schooldiary.lesson.dto.CreateLessonViewDTO;
-import pl.andrzejjozefow.schooldiary.lesson.dto.LessonDTO;
 import pl.andrzejjozefow.schooldiary.lesson.dto.LessonListViewDTO;
 import pl.andrzejjozefow.schooldiary.student.Student;
 import pl.andrzejjozefow.schooldiary.student.StudentService;
@@ -35,7 +33,8 @@ public class LessonController {
   }
 
   @RequestMapping(value = "students/{studentId}/lessons/new", method = RequestMethod.GET)
-  public String initNewLessonForm(@PathVariable("studentId") Integer studentId, Map<String, Object> model) {
+  public String initNewLessonForm(@PathVariable("studentId") Integer studentId,
+      Map<String, Object> model) {
     Optional<Student> student = Optional.ofNullable(studentService.getStudent(studentId));
     if (student.isPresent()) {
       CreateLessonViewDTO createLessonViewDTO = new CreateLessonViewDTO(student);

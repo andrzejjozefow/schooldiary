@@ -1,7 +1,6 @@
 package pl.andrzejjozefow.schooldiary.lesson;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +25,5 @@ public class LessonService {
     List<Lesson> lessons = new ArrayList<>();
     lessonRepository.findAll().forEach(lessons::add);
     return lessons;
-
   }
 }

@@ -1,8 +1,6 @@
 package pl.andrzejjozefow.schooldiary.student;
 
 
-
-
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -23,7 +21,8 @@ import pl.andrzejjozefow.schooldiary.lesson.Lesson;
 import pl.andrzejjozefow.schooldiary.model.BaseEntity;
 
 
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -37,7 +36,7 @@ public class Student extends BaseEntity {
   @DateTimeFormat(pattern = "yyyy/MM/dd")
   private Date birthDate;
 
-  @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "student" )
+  @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "student")
   private ContactDetails contactDetails;
 
 

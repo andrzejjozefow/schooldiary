@@ -3,7 +3,6 @@ package pl.andrzejjozefow.schooldiary.lesson.dto;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import lombok.Getter;
 import pl.andrzejjozefow.schooldiary.lesson.Lesson;
@@ -21,7 +20,7 @@ public class LessonDTO {
     this.lessonDate = lesson.getDate();
   }
 
-  public static List<LessonDTO> from(final Collection<Lesson> lessons){
+  public static List<LessonDTO> from(final Collection<Lesson> lessons) {
     return lessons.stream()
         .map(LessonDTO::new)
         .collect(Collectors.toList());

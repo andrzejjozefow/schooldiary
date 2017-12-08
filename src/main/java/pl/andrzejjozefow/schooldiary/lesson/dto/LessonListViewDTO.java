@@ -24,7 +24,7 @@ public class LessonListViewDTO {
     this.studentLastName = lesson.getStudent().getLastName();
   }
 
-  public static List<LessonListViewDTO> from(final Collection<Lesson> lessons){
+  public static List<LessonListViewDTO> from(final Collection<Lesson> lessons) {
     return lessons.stream()
         .map(LessonListViewDTO::new)
         .collect(Collectors.toList());
