@@ -1,5 +1,6 @@
 package pl.andrzejjozefow.schooldiary.student;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.validation.Valid;
@@ -30,8 +31,6 @@ public class StudentController {
     dataBinder.setDisallowedFields("id");
   }
 
-
-
   @RequestMapping(value = "/students/new", method = RequestMethod.GET)
   public String initCreationForm(Map<String, Object> model) {
     Student student = new Student();
@@ -56,7 +55,8 @@ public class StudentController {
   @RequestMapping("/students")
   public String showStudents(Map<String, Object> model) {
     List<Student> students = studentService.getAllStudents();
-    model.put("student", students);
+    List<StudentListViewDTO> studentsListViewDTO = StudentListViewDTO.from(students);
+    model.put("student", studentsListViewDTO);
     return "studentsList";
   }
 
@@ -66,5 +66,4 @@ public class StudentController {
     model.put("student", student);
     return "studentDetails";
   }
-
 }

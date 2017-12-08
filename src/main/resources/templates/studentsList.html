@@ -12,39 +12,33 @@
       <th>id</th>
       <th>firstname</th>
       <th>lastname</th>
-      <th>birth date</th>
       <th>e-mail</th>
       <th>phone</th>
     </tr>
     <tr th:each="student : ${student}">
       <td>
-        <a href="studentDetails.html" th:href="@{'/students/' + ${student.id}}">
-          <div th:text="${student.id}"></div>
+        <a href="studentDetails.html" th:href="@{'/students/' + ${student.studentId}}">
+          <div th:text="${student.studentId}"></div>
         </a>
       </td>
       <td>
-        <a href="studentDetails.html" th:href="@{'/students/' + ${student.id}}">
-          <div th:text="${student.firstName}"></div>
+        <a href="studentDetails.html" th:href="@{'/students/' + ${student.studentId}}">
+          <div th:text="${student.studentFirstName}"></div>
         </a>
       </td>
       <td>
-        <a href="studentDetails.html" th:href="@{'/students/' + ${student.id}}">
-          <div th:text="${student.lastName}"></div>
+        <a href="studentDetails.html" th:href="@{'/students/' + ${student.studentId}}">
+          <div th:text="${student.studentLastName}"></div>
         </a>
       </td>
       <td>
-        <a href="studentDetails.html" th:href="@{'/students/' + ${student.id}}">
-          <div th:text="${student.birthDate}"></div>
+        <a href="studentDetails.html" th:href="@{'/students/' + ${student.studentId}}">
+          <div th:text="${student.studentEmail}"></div>
         </a>
       </td>
       <td>
-        <a href="studentDetails.html" th:href="@{'/students/' + ${student.id}}">
-          <div th:text="${student.ContactDetails.email}"></div>
-        </a>
-      </td>
-      <td>
-        <a href="studentDetails.html" th:href="@{'/students/' + ${student.id}}">
-          <div th:text="${student.ContactDetails.phoneNumber}"></div>
+        <a href="studentDetails.html" th:href="@{'/students/' + ${student.studentId}}">
+          <div th:text="${student.studentPhone}"></div>
         </a>
       </td>
     </tr>
