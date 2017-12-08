@@ -2,6 +2,7 @@ package pl.andrzejjozefow.schooldiary.student;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -63,9 +64,13 @@ public class StudentController {
 
   @RequestMapping("/students/{studentId}")
   public String showStudent(@PathVariable("studentId") Integer studentId, Map<String, Object> model) {
-    Student student = studentService.getStudent(studentId);
-    StudentDetailsViewDTO studentDetailsViewDTO = new StudentDetailsViewDTO(student);
+    Optional<Student> student = Optional.ofNullable(studentService.getStudent(studentId));
+    if (student.isPresent()){
+    StudentDetailsViewDTO studentDetailsViewDTO = new StudentDetailsViewDTO(student.get());
     model.put("student", studentDetailsViewDTO);
     return "/student/studentDetails";
+    } else {
+      return "welcome";
+    }
   }
 }

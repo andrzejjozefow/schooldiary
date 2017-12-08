@@ -6,10 +6,10 @@
 
   <groupId>pl.andrzejjozefow</groupId>
   <artifactId>schooldiary</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.1</version>
   <packaging>jar</packaging>
 
-  <firstName>schooldiary</firstName>
+  <name>schooldiary</name>
   <description>Demo project for Spring Boot</description>
 
   <parent>

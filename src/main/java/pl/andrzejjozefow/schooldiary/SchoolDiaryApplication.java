@@ -32,25 +32,29 @@ public class SchoolDiaryApplication {
 
   @PostConstruct
   public void initData() {
-    ContactDetails contactDetails = new ContactDetails(null, "asdfg@wp.pl", "123", "dsadas", "dasda", "dasda", "dsadsa");
+    ContactDetails contactDetails = new ContactDetails(
+        null,
+        "asdfg@wp.pl",
+        "+123456789",
+        "Kwiatowa 2",
+        "Stare Pole",
+        "12-345",
+        "Polska");
 
-    Student jakub = new Student("Jakub","Spręga", new Date(), contactDetails, null);
-    studentRepository.save(jakub);
+    Student janNowak = new Student(
+        "Jan",
+        "Nowak",
+        new Date(), contactDetails,
+        null);
 
-    contactDetails.setStudent(jakub);
+    studentRepository.save(janNowak);
+    contactDetails.setStudent(janNowak);
     contactDetailsRepository.save(contactDetails);
-
-
     Lesson lesson = new Lesson();
-    lesson.setSubject("Gitara");
+    lesson.setSubject("A.Tansman, 'Variationes sur un théme de Scriabine' - odczytywanie utworu, aplikatura");
     lesson.setDate(new Date());
-    lesson.setStudent(jakub);
+    lesson.setStudent(janNowak);
     lessonRepository.save(lesson);
-    //studentRepository.save(new Student("Andrzej", "Józefów"));
-//
-    Set<Lesson> lessons = studentRepository.findById(jakub.getId()).getLessons();
-    //System.out.println(lesson);
-
+    Set<Lesson> lessons = studentRepository.findById(janNowak.getId()).getLessons();
   }
-
 }
