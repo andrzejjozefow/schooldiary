@@ -33,7 +33,8 @@ public class LessonController {
   @RequestMapping(value = "students/{studentId}/lessons/new", method = RequestMethod.GET)
   public String initNewLessonForm(@PathVariable("studentId") Integer studentId, Map<String, Object> model) {
     Student student = studentService.getStudent(studentId);
-    model.put("student", student);
+    CreateLessonViewDTO createLessonViewDTO = new CreateLessonViewDTO(student);
+    model.put("student", createLessonViewDTO);
     model.put("lesson", new Lesson());
     return "createOrUpdateLessonForm";
   }
@@ -41,7 +42,8 @@ public class LessonController {
   @RequestMapping(value = "students/{studentId}/lessons/new", method = RequestMethod.POST)
   public String processNewLessonForm(@PathVariable("studentId") Student student,
       @Valid Lesson lesson, BindingResult result, Map<String, Object> model) {
-    model.put("student", student);
+    CreateLessonViewDTO createLessonViewDTO = new CreateLessonViewDTO(student);
+    model.put("student", createLessonViewDTO);
     if (result.hasErrors()) {
       return "createOrUpdateLessonForm";
     } else {

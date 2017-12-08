@@ -6,11 +6,11 @@
   </head>
   <body>
     <h1>
-      <td th:text="${student.firstName} + ' ' + ${student.lastName}"/>
+      <td th:text="${student.studentFirstName} + ' ' + ${student.studentLastName}"/>
     </h1>
     <form th:object="${lesson}" method="post">
       <input type="text" placeholder="lesson subject" th:field="*{subject}" />
-      <input type="hidden" firstName="student_id" th:value="${student.id}"/>
+      <input type="hidden" firstName="student_id" th:value="${student.studentId}"/>
       <button algin="left" type="submit" class="button">+</button>
     </form>
   </body>
