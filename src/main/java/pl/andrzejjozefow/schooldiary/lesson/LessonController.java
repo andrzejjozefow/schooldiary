@@ -1,6 +1,8 @@
 package pl.andrzejjozefow.schooldiary.lesson;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import pl.andrzejjozefow.schooldiary.lesson.dto.CreateLessonViewDTO;
+import pl.andrzejjozefow.schooldiary.lesson.dto.LessonDTO;
+import pl.andrzejjozefow.schooldiary.lesson.dto.LessonListViewDTO;
 import pl.andrzejjozefow.schooldiary.student.Student;
 import pl.andrzejjozefow.schooldiary.student.StudentService;
 
@@ -55,7 +59,9 @@ public class LessonController {
 
   @RequestMapping("/lessons")
   public String lessons(Map<String, Object> model) {
-    model.put("lessons", lessonService.getAllLessons());
+    List<Lesson> lessons = lessonService.getAllLessons();
+    List<LessonListViewDTO> lessonsListViewDTO = LessonListViewDTO.from(lessons);
+    model.put("lessons", lessonsListViewDTO);
     return "lessonList";
   }
 }

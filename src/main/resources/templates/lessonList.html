@@ -10,10 +10,12 @@
       <tr>
         <th>Student</th>
         <th>Subject</th>
+        <th>Date</th>
       </tr>
       <tr th:each="lesson : ${lessons}">
-        <td th:text="${lesson.student.firstName}"></td>
-        <td th:text="${lesson.subject}"></td>
+        <td th:text="${lesson.studentFirstName} + ' ' + ${lesson.studentLastName}"></td>
+        <td th:text="${lesson.lessonSubject}"></td>
+        <td th:text="${lesson.lessonDate}"/>
       </tr>
     </table>
   </body>
