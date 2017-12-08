@@ -38,13 +38,13 @@ public class StudentController {
     ContactDetails contactDetails = new ContactDetails();
     model.put("student", student);
     model.put("contactdetails", contactDetails);
-    return "createOrUpdateStudentForm";
+    return "/student/createOrUpdateStudentForm";
   }
 
   @RequestMapping(value = "/students/new", method = RequestMethod.POST)
   public String processCreationForm(@Valid Student student, ContactDetails contactDetails, BindingResult result) {
     if (result.hasErrors()) {
-      return "createOrUpdateStudentForm";
+      return "/student/createOrUpdateStudentForm";
     } else {
       this.studentService.addStudent(student);
       contactDetails.setStudent(student);
@@ -58,7 +58,7 @@ public class StudentController {
     List<Student> students = studentService.getAllStudents();
     List<StudentListViewDTO> studentsListViewDTO = StudentListViewDTO.from(students);
     model.put("student", studentsListViewDTO);
-    return "studentsList";
+    return "/student/studentsList";
   }
 
   @RequestMapping("/students/{studentId}")
@@ -66,6 +66,6 @@ public class StudentController {
     Student student = studentService.getStudent(studentId);
     StudentDetailsViewDTO studentDetailsViewDTO = new StudentDetailsViewDTO(student);
     model.put("student", studentDetailsViewDTO);
-    return "studentDetails";
+    return "/student/studentDetails";
   }
 }

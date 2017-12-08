@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -35,20 +36,26 @@ public class LessonController {
 
   @RequestMapping(value = "students/{studentId}/lessons/new", method = RequestMethod.GET)
   public String initNewLessonForm(@PathVariable("studentId") Integer studentId, Map<String, Object> model) {
-    Student student = studentService.getStudent(studentId);
-    CreateLessonViewDTO createLessonViewDTO = new CreateLessonViewDTO(student);
-    model.put("student", createLessonViewDTO);
-    model.put("lesson", new Lesson());
-    return "createOrUpdateLessonForm";
+    Optional<Student> student = Optional.ofNullable(studentService.getStudent(studentId));
+    if (student.isPresent()) {
+      CreateLessonViewDTO createLessonViewDTO = new CreateLessonViewDTO(student);
+      model.put("student", createLessonViewDTO);
+      model.put("lesson", new Lesson());
+      return "/lesson/createOrUpdateLessonForm";
+    } else {
+      return "welcome";
+    }
+
+
   }
 
   @RequestMapping(value = "students/{studentId}/lessons/new", method = RequestMethod.POST)
   public String processNewLessonForm(@PathVariable("studentId") Student student,
       @Valid Lesson lesson, BindingResult result, Map<String, Object> model) {
-    CreateLessonViewDTO createLessonViewDTO = new CreateLessonViewDTO(student);
+    CreateLessonViewDTO createLessonViewDTO = new CreateLessonViewDTO(Optional.ofNullable(student));
     model.put("student", createLessonViewDTO);
     if (result.hasErrors()) {
-      return "createOrUpdateLessonForm";
+      return "/lesson/createOrUpdateLessonForm";
     } else {
       lesson.setStudent(student);
       lesson.setDate(new Date());
@@ -62,6 +69,6 @@ public class LessonController {
     List<Lesson> lessons = lessonService.getAllLessons();
     List<LessonListViewDTO> lessonsListViewDTO = LessonListViewDTO.from(lessons);
     model.put("lessons", lessonsListViewDTO);
-    return "lessonList";
+    return "/lesson/lessonList";
   }
 }
