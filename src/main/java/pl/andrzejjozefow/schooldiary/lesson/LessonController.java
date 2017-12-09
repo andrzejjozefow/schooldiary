@@ -26,11 +26,6 @@ public class LessonController {
     this.studentService = studentService;
   }
 
-  public void loadStudentWithLesson(Student student, Lesson lesson, Map<String, Object> model) {
-    model.put("student", student);
-    student.addLesson(lesson);
-    model.put("lesson", lesson);
-  }
 
   @RequestMapping(value = "students/{studentId}/lessons/new", method = RequestMethod.GET)
   public String initNewLessonForm(@PathVariable("studentId") Integer studentId,
@@ -44,8 +39,6 @@ public class LessonController {
     } else {
       return "welcome";
     }
-
-
   }
 
   @RequestMapping(value = "students/{studentId}/lessons/new", method = RequestMethod.POST)
