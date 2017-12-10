@@ -23,7 +23,7 @@ public class StudentDetailsViewDto {
     private final List<LessonDto> lessonsDto;
 
 
-    public StudentDetailsViewDto(final Student student, Double avgScore) {
+    public StudentDetailsViewDto(final Student student, final Double avgScore) {
         this.id = student.getId();
         this.firstName = student.getFirstName();
         this.lastName = student.getLastName();

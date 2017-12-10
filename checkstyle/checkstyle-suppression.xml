@@ -5,4 +5,5 @@
 <suppressions>
 
   <suppress files=".*Repository\.java" checks="InterfaceIsType" />
+  <suppress files=".Lesson\.java" checks="WhitespaceAroundCheck" />
 </suppressions>
