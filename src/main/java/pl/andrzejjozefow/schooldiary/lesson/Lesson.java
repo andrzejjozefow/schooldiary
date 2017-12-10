@@ -18,13 +18,13 @@ import pl.andrzejjozefow.schooldiary.student.Student;
 @Entity
 public class Lesson extends BaseEntity {
 
-  @ManyToOne
-  @JoinColumn(name = "student_id")
-  private Student student;
+    @ManyToOne
+    @JoinColumn(name = "student_id")
+    private Student student;
 
-  @NotEmpty
-  private String subject;
+    @NotEmpty
+    private String subject;
 
-  private Date date;
+    private Date date;
 
 }

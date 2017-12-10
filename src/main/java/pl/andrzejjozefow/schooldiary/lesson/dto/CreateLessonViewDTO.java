@@ -8,13 +8,13 @@ import pl.andrzejjozefow.schooldiary.student.Student;
 @Getter
 public class CreateLessonViewDTO {
 
-  private final Integer studentId;
-  private final String studentFirstName;
-  private final String studentLastName;
+    private final Integer studentId;
+    private final String studentFirstName;
+    private final String studentLastName;
 
-  public CreateLessonViewDTO(final Optional<Student> student) {
-    this.studentId = student.get().getId();
-    this.studentFirstName = student.get().getFirstName();
-    this.studentLastName = student.get().getLastName();
-  }
+    public CreateLessonViewDTO(final Student student) {
+        this.studentId = student.getId();
+        this.studentFirstName = student.getFirstName();
+        this.studentLastName = student.getLastName();
+    }
 }

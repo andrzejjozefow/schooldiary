@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import javax.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,52 +16,47 @@ import pl.andrzejjozefow.schooldiary.lesson.dto.LessonListViewDTO;
 import pl.andrzejjozefow.schooldiary.student.Student;
 import pl.andrzejjozefow.schooldiary.student.StudentService;
 
+@RequiredArgsConstructor
 @Controller
 public class LessonController {
 
-  private final LessonService lessonService;
-  private final StudentService studentService;
+    private final LessonService lessonService;
+    private final StudentService studentService;
 
-  public LessonController(LessonService lessonService, StudentService studentService) {
-    this.lessonService = lessonService;
-    this.studentService = studentService;
-  }
-
-
-  @RequestMapping(value = "students/{studentId}/lessons/new", method = RequestMethod.GET)
-  public String initNewLessonForm(@PathVariable("studentId") Integer studentId,
-      Map<String, Object> model) {
-    Optional<Student> student = Optional.ofNullable(studentService.getStudent(studentId));
-    if (student.isPresent()) {
-      CreateLessonViewDTO createLessonViewDTO = new CreateLessonViewDTO(student);
-      model.put("student", createLessonViewDTO);
-      model.put("lesson", new Lesson());
-      return "/lesson/createOrUpdateLessonForm";
-    } else {
-      return "welcome";
+    @RequestMapping(value = "students/{studentId}/lessons/new", method = RequestMethod.GET)
+    public String initNewLessonForm(@PathVariable("studentId") Integer studentId,
+        Map<String, Object> model) {
+        Optional<Student> student = studentService.getStudent(studentId);
+        if (student.isPresent()) {
+            CreateLessonViewDTO createLessonViewDTO = new CreateLessonViewDTO(student.get());
+            model.put("student", createLessonViewDTO);
+            model.put("lesson", new Lesson());
+            return "/lesson/createOrUpdateLessonForm";
+        } else {
+            return "welcome";
+        }
     }
-  }
 
-  @RequestMapping(value = "students/{studentId}/lessons/new", method = RequestMethod.POST)
-  public String processNewLessonForm(@PathVariable("studentId") Student student,
-      @Valid Lesson lesson, BindingResult result, Map<String, Object> model) {
-    CreateLessonViewDTO createLessonViewDTO = new CreateLessonViewDTO(Optional.ofNullable(student));
-    model.put("student", createLessonViewDTO);
-    if (result.hasErrors()) {
-      return "/lesson/createOrUpdateLessonForm";
-    } else {
-      lesson.setStudent(student);
-      lesson.setDate(new Date());
-      this.lessonService.addLesson(lesson);
-      return "redirect:/students/{studentId}";
+    @RequestMapping(value = "students/{studentId}/lessons/new", method = RequestMethod.POST)
+    public String processNewLessonForm(@PathVariable("studentId") Student student,
+        @Valid Lesson lesson, BindingResult result, Map<String, Object> model) {
+        CreateLessonViewDTO createLessonViewDTO = new CreateLessonViewDTO(student);
+        model.put("student", createLessonViewDTO);
+        if (result.hasErrors()) {
+            return "/lesson/createOrUpdateLessonForm";
+        } else {
+            lesson.setStudent(student); //TODO Do we really need this?
+            lesson.setDate(new Date());
+            this.lessonService.addLesson(lesson);
+            return "redirect:/students/{studentId}";
+        }
     }
-  }
 
-  @RequestMapping("/lessons")
-  public String lessons(Map<String, Object> model) {
-    List<Lesson> lessons = lessonService.getAllLessons();
-    List<LessonListViewDTO> lessonsListViewDTO = LessonListViewDTO.from(lessons);
-    model.put("lessons", lessonsListViewDTO);
-    return "/lesson/lessonList";
-  }
+    @RequestMapping("/lessons")
+    public String lessons(Map<String, Object> model) {
+        List<Lesson> lessons = lessonService.getAllLessons();
+        List<LessonListViewDTO> lessonsListViewDTO = LessonListViewDTO.from(lessons);
+        model.put("lessons", lessonsListViewDTO);
+        return "/lesson/lessonList";
+    }
 }

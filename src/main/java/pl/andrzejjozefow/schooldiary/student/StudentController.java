@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import javax.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -16,63 +17,56 @@ import pl.andrzejjozefow.schooldiary.student.ContactDetails.ContactDetailsServic
 import pl.andrzejjozefow.schooldiary.student.dto.StudentDetailsViewDTO;
 import pl.andrzejjozefow.schooldiary.student.dto.StudentListViewDTO;
 
+@RequiredArgsConstructor
 @Controller
 public class StudentController {
 
-  private final StudentService studentService;
-  private final ContactDetailsService contactDetailsService;
+    private final StudentService studentService;
+    private final ContactDetailsService contactDetailsService;
 
-  public StudentController(StudentService studentService,
-      ContactDetailsService contactDetailsService) {
-    this.studentService = studentService;
-    this.contactDetailsService = contactDetailsService;
-  }
-
-  @InitBinder
-  public void setAllowedFields(WebDataBinder dataBinder) {
-    dataBinder.setDisallowedFields("id");
-  }
-
-  @RequestMapping(value = "/students/new", method = RequestMethod.GET)
-  public String initCreationForm(Map<String, Object> model) {
-    Student student = new Student();
-    ContactDetails contactDetails = new ContactDetails();
-    model.put("student", student);
-    model.put("contactdetails", contactDetails);
-    return "/student/createOrUpdateStudentForm";
-  }
-
-  @RequestMapping(value = "/students/new", method = RequestMethod.POST)
-  public String processCreationForm(@Valid Student student, ContactDetails contactDetails,
-      BindingResult result) {
-    if (result.hasErrors()) {
-      return "/student/createOrUpdateStudentForm";
-    } else {
-      this.studentService.addStudent(student);
-      contactDetails.setStudent(student);
-      this.contactDetailsService.addContactDetails(contactDetails);
-      return "redirect:/students/";
+    @InitBinder
+    public void setAllowedFields(WebDataBinder dataBinder) {
+        dataBinder.setDisallowedFields("id");
     }
-  }
 
-  @RequestMapping("/students")
-  public String showStudents(Map<String, Object> model) {
-    List<Student> students = studentService.getAllStudents();
-    List<StudentListViewDTO> studentsListViewDTO = StudentListViewDTO.from(students);
-    model.put("student", studentsListViewDTO);
-    return "/student/studentsList";
-  }
-
-  @RequestMapping("/students/{studentId}")
-  public String showStudent(@PathVariable("studentId") Integer studentId,
-      Map<String, Object> model) {
-    Optional<Student> student = Optional.ofNullable(studentService.getStudent(studentId));
-    if (student.isPresent()) {
-      StudentDetailsViewDTO studentDetailsViewDTO = new StudentDetailsViewDTO(student.get());
-      model.put("student", studentDetailsViewDTO);
-      return "/student/studentDetails";
-    } else {
-      return "welcome";
+    @RequestMapping(value = "/students/new", method = RequestMethod.GET)
+    public String initCreationForm(Map<String, Object> model) {
+        model.put("student", new Student());
+        model.put("contactdetails", new ContactDetails());
+        return "/student/createOrUpdateStudentForm";
     }
-  }
+
+    @RequestMapping(value = "/students/new", method = RequestMethod.POST)
+    public String processCreationForm(@Valid Student student, ContactDetails contactDetails,
+        BindingResult result) {
+        if (result.hasErrors()) {
+            return "/student/createOrUpdateStudentForm";
+        } else {
+            this.studentService.addStudent(student);
+            contactDetails.setStudent(student);
+            this.contactDetailsService.addContactDetails(contactDetails);
+            return "redirect:/students/";
+        }
+    }
+
+    @RequestMapping("/students")
+    public String showStudents(Map<String, Object> model) {
+        List<Student> students = studentService.getAllStudents();
+        List<StudentListViewDTO> studentsListViewDTO = StudentListViewDTO.from(students);
+        model.put("student", studentsListViewDTO);
+        return "/student/studentsList";
+    }
+
+    @RequestMapping("/students/{studentId}")
+    public String showStudent(@PathVariable("studentId") Integer studentId,
+        Map<String, Object> model) {
+        Optional<Student> student = studentService.getStudent(studentId);
+        if (student.isPresent()) {
+            StudentDetailsViewDTO studentDetailsViewDTO = new StudentDetailsViewDTO(student.get());
+            model.put("student", studentDetailsViewDTO);
+            return "/student/studentDetails";
+        } else {
+            return "welcome";
+        }
+    }
 }

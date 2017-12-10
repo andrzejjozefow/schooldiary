@@ -15,21 +15,21 @@ import pl.andrzejjozefow.schooldiary.student.Student;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class ContactDetails extends BaseEntity {
+public class ContactDetails extends BaseEntity { //TODO Reafactor in a way that new table will not be created
 
-  @OneToOne
-  @JoinColumn(name = "student_id")
-  private Student student;
+    @OneToOne
+    @JoinColumn(name = "student_id")
+    private Student student;
 
-  private String email;
+    private String email;
 
-  private String phoneNumber;
+    private String phoneNumber;
 
-  private String street;
+    private String street;
 
-  private String city;
+    private String city;
 
-  private String zipCode;
+    private String zipCode;
 
-  private String country;
+    private String country;
 }

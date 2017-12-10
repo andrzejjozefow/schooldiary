@@ -10,23 +10,23 @@ import pl.andrzejjozefow.schooldiary.lesson.Lesson;
 @Getter
 public class LessonListViewDTO {
 
-  private final Integer lessonId;
-  private final String lessonSubject;
-  private final Date lessonDate;
-  private final String studentFirstName;
-  private final String studentLastName;
+    private final Integer lessonId;
+    private final String lessonSubject;
+    private final Date lessonDate;
+    private final String studentFirstName;
+    private final String studentLastName;
 
-  public LessonListViewDTO(final Lesson lesson) {
-    this.lessonId = lesson.getId();
-    this.lessonSubject = lesson.getSubject();
-    this.lessonDate = lesson.getDate();
-    this.studentFirstName = lesson.getStudent().getFirstName();
-    this.studentLastName = lesson.getStudent().getLastName();
-  }
+    public LessonListViewDTO(final Lesson lesson) {
+        this.lessonId = lesson.getId();
+        this.lessonSubject = lesson.getSubject();
+        this.lessonDate = lesson.getDate();
+        this.studentFirstName = lesson.getStudent().getFirstName();
+        this.studentLastName = lesson.getStudent().getLastName();
+    }
 
-  public static List<LessonListViewDTO> from(final Collection<Lesson> lessons) {
-    return lessons.stream()
-        .map(LessonListViewDTO::new)
-        .collect(Collectors.toList());
-  }
+    public static List<LessonListViewDTO> from(final Collection<Lesson> lessons) {
+        return lessons.stream()
+            .map(LessonListViewDTO::new)
+            .collect(Collectors.toList());
+    }
 }

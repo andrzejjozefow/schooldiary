@@ -26,34 +26,29 @@ import pl.andrzejjozefow.schooldiary.model.BaseEntity;
 @Entity
 public class Student extends BaseEntity {
 
-  private String firstName;
+    private String firstName;
 
-  private String lastName;
+    private String lastName;
 
-  @Temporal(TemporalType.DATE)
-  @DateTimeFormat(pattern = "yyyy/MM/dd")
-  private Date birthDate;
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
+    private Date birthDate;
 
-  @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "student")
-  private ContactDetails contactDetails;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "student")
+    private ContactDetails contactDetails;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "student")
+    private Set<Lesson> lessons = new LinkedHashSet<>();
 
-  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "student")
-  private Set<Lesson> lessons = new LinkedHashSet<>();
+    public Student(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthDate = new Date();
+    }
 
+    public void addLesson(Lesson lesson) {
+        lessons.add(lesson);
+        lesson.setStudent(this);
+    }
 
-  public Student(String firstName, String lastName) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.birthDate = new Date();
-  }
-
-  public Set<Lesson> getLessons() {
-    return lessons;
-  }
-
-  public void addLesson(Lesson lesson) {
-    lessons.add(lesson);
-    lesson.setStudent(this);
-  }
 }

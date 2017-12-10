@@ -12,8 +12,8 @@ import lombok.Setter;
 @Setter
 public class BaseEntity implements Serializable {
 
-  @Id
-  @GeneratedValue
-  private Integer id;
+    @Id
+    @GeneratedValue
+    private Integer id;
 
 }

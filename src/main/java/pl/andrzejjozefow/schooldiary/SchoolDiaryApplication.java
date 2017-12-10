@@ -55,6 +55,6 @@ public class SchoolDiaryApplication {
     lesson.setDate(new Date());
     lesson.setStudent(janNowak);
     lessonRepository.save(lesson);
-    Set<Lesson> lessons = studentRepository.findById(janNowak.getId()).getLessons();
+    Set<Lesson> lessons = studentRepository.findOne(janNowak.getId()).getLessons();
   }
 }
