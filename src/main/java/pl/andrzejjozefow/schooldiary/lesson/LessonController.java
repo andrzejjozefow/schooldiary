@@ -45,7 +45,7 @@ public class LessonController {
         if (result.hasErrors()) {
             return "/lesson/createOrUpdateLessonForm";
         } else {
-            lesson.setStudent(student); //TODO Do we really need this?
+            lesson.setStudent(student);
             lesson.setDate(new Date());
             this.lessonService.addLesson(lesson);
             return "redirect:/students/{studentId}";
