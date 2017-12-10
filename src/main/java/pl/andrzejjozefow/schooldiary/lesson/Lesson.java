@@ -30,7 +30,7 @@ public class Lesson extends BaseEntity {
 
     private Date date;
 
-    @Range(min=0, max=5, message = "Score should be between 0 and 5")
+    @Range(min = 0, max = 5, message = "Score should be between 0 and 5")
     private Integer score;
 
 }
