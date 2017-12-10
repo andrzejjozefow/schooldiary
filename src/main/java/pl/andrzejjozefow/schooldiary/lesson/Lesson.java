@@ -4,6 +4,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,6 +16,7 @@ import pl.andrzejjozefow.schooldiary.student.Student;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Lesson extends BaseEntity {
 
@@ -26,5 +28,7 @@ public class Lesson extends BaseEntity {
     private String subject;
 
     private Date date;
+
+    private Integer score;
 
 }

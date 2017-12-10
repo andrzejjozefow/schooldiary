@@ -53,6 +53,7 @@ public class SchoolDiaryApplication {
     Lesson lesson = new Lesson();
     lesson.setSubject("A.Tansman, 'Variationes sur un théme de Scriabine' - odczytywanie utworu, aplikatura");
     lesson.setDate(new Date());
+    lesson.setScore(5);
     lesson.setStudent(janNowak);
     lessonRepository.save(lesson);
     Set<Lesson> lessons = studentRepository.findOne(janNowak.getId()).getLessons();

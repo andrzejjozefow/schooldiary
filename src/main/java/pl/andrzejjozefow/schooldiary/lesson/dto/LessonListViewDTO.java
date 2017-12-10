@@ -15,6 +15,7 @@ public class LessonListViewDTO {
     private final Date lessonDate;
     private final String studentFirstName;
     private final String studentLastName;
+    private final Integer studentScore;
 
     public LessonListViewDTO(final Lesson lesson) {
         this.lessonId = lesson.getId();
@@ -22,6 +23,7 @@ public class LessonListViewDTO {
         this.lessonDate = lesson.getDate();
         this.studentFirstName = lesson.getStudent().getFirstName();
         this.studentLastName = lesson.getStudent().getLastName();
+        this.studentScore = lesson.getScore();
     }
 
     public static List<LessonListViewDTO> from(final Collection<Lesson> lessons) {
