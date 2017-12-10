@@ -1,26 +1,26 @@
 <html xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <title>
-      Add new student
-    </title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
-  </head>
-  <body>
-    <h1>Add new student</h1>
-    <form th:object="${student}" id="add-student-form" method="post">
-      <input type="text" th:field="*{firstName}" placeholder="firstname"/>
-      <input type="text" th:field="*{lastName}" placeholder="lastname"/>
-      <input type="text" th:field="*{birthDate}" placeholder="birth date yyyy/MM/dd"/>
-      <input type="text" th:field="${contactdetails.email}" placeholder="example@domain.com"/>
-      <input type="text" th:field="${contactdetails.phoneNumber}" placeholder="phone number"/>
-      <input type="text" th:field="${contactdetails.street}" placeholder="street"/>
-      <input type="text" th:field="${contactdetails.city}" placeholder="city"/>
-      <input type="text" th:field="${contactdetails.zipCode}" placeholder="zipcode"/>
-      <input type="text" th:field="${contactdetails.country}" placeholder="country"/>
-      <button class = "button" th:with="text='Add Student'" type="submit" th:text="${text}">
-        Add Student
-      </button>
-    </form>
-  </body>
+<head>
+  <title>
+    Add new student
+  </title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
+</head>
+<body>
+<h1>Add new student</h1>
+<form th:object="${student}" id="add-student-form" method="post">
+  <input type="text" th:field="*{firstName}" placeholder="firstname"/>
+  <input type="text" th:field="*{lastName}" placeholder="lastname"/>
+  <input type="text" th:field="*{birthDate}" placeholder="birth date yyyy/MM/dd"/>
+  <input type="text" th:field="*{email}" placeholder="example@domain.com"/>
+  <input type="text" th:field="*{phoneNumber}" placeholder="phone number"/>
+  <input type="text" th:field="*{street}" placeholder="street"/>
+  <input type="text" th:field="*{city}" placeholder="city"/>
+  <input type="text" th:field="*{zipCode}" placeholder="zipcode"/>
+  <input type="text" th:field="*{country}" placeholder="country"/>
+  <button class="button" th:with="text='Add Student'" type="submit" th:text="${text}">
+    Add Student
+  </button>
+</form>
+</body>
 </html>

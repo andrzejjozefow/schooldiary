@@ -11,8 +11,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import pl.andrzejjozefow.schooldiary.lesson.dto.CreateLessonViewDTO;
-import pl.andrzejjozefow.schooldiary.lesson.dto.LessonListViewDTO;
+import pl.andrzejjozefow.schooldiary.lesson.dto.CreateLessonViewDto;
+import pl.andrzejjozefow.schooldiary.lesson.dto.LessonListViewDto;
 import pl.andrzejjozefow.schooldiary.student.Student;
 import pl.andrzejjozefow.schooldiary.student.StudentService;
 
@@ -24,12 +24,12 @@ public class LessonController {
     private final StudentService studentService;
 
     @RequestMapping(value = "students/{studentId}/lessons/new", method = RequestMethod.GET)
-    public String initNewLessonForm(@PathVariable("studentId") Integer studentId,
-        Map<String, Object> model) {
-        Optional<Student> student = studentService.getStudent(studentId);
+    public String initNewLessonForm(@PathVariable("studentId") final Integer studentId,
+        final Map<String, Object> model) {
+        final Optional<Student> student = studentService.getStudent(studentId);
         if (student.isPresent()) {
-            CreateLessonViewDTO createLessonViewDTO = new CreateLessonViewDTO(student.get());
-            model.put("student", createLessonViewDTO);
+            final CreateLessonViewDto createLessonViewDto = new CreateLessonViewDto(student.get());
+            model.put("student", createLessonViewDto);
             model.put("lesson", new Lesson());
             return "/lesson/createOrUpdateLessonForm";
         } else {
@@ -38,10 +38,10 @@ public class LessonController {
     }
 
     @RequestMapping(value = "students/{studentId}/lessons/new", method = RequestMethod.POST)
-    public String processNewLessonForm(@PathVariable("studentId") Student student,
-        @Valid Lesson lesson, BindingResult result, Map<String, Object> model) {
-        CreateLessonViewDTO createLessonViewDTO = new CreateLessonViewDTO(student);
-        model.put("student", createLessonViewDTO);
+    public String processNewLessonForm(@PathVariable("studentId") final Student student,
+        @Valid final Lesson lesson, final BindingResult result, final Map<String, Object> model) {
+        final CreateLessonViewDto createLessonViewDto = new CreateLessonViewDto(student);
+        model.put("student", createLessonViewDto);
         if (result.hasErrors()) {
             return "/lesson/createOrUpdateLessonForm";
         } else {
@@ -53,10 +53,10 @@ public class LessonController {
     }
 
     @RequestMapping("/lessons")
-    public String lessons(Map<String, Object> model) {
-        List<Lesson> lessons = lessonService.getAllLessons();
-        List<LessonListViewDTO> lessonsListViewDTO = LessonListViewDTO.from(lessons);
-        model.put("lessons", lessonsListViewDTO);
+    public String lessons(final Map<String, Object> model) {
+        final List<Lesson> lessons = lessonService.getAllLessons();
+        final List<LessonListViewDto> lessonsListViewDto = LessonListViewDto.from(lessons);
+        model.put("lessons", lessonsListViewDto);
         return "/lesson/lessonList";
     }
 }

@@ -1,47 +1,47 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Students</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
-  <h1 align="center">students list</h1>
-  <a href="/students/new" class="button">new student</a>
-  <table align="center">
-    <tr>
-      <th>id</th>
-      <th>firstname</th>
-      <th>lastname</th>
-      <th>e-mail</th>
-      <th>phone</th>
-    </tr>
-    <tr th:each="student : ${student}">
-      <td>
-        <a href="studentDetails.html" th:href="@{'/students/' + ${student.studentId}}">
-          <div th:text="${student.studentId}"></div>
-        </a>
-      </td>
-      <td>
-        <a href="studentDetails.html" th:href="@{'/students/' + ${student.studentId}}">
-          <div th:text="${student.studentFirstName}"></div>
-        </a>
-      </td>
-      <td>
-        <a href="studentDetails.html" th:href="@{'/students/' + ${student.studentId}}">
-          <div th:text="${student.studentLastName}"></div>
-        </a>
-      </td>
-      <td>
-        <a href="studentDetails.html" th:href="@{'/students/' + ${student.studentId}}">
-          <div th:text="${student.studentEmail}"></div>
-        </a>
-      </td>
-      <td>
-        <a href="studentDetails.html" th:href="@{'/students/' + ${student.studentId}}">
-          <div th:text="${student.studentPhone}"></div>
-        </a>
-      </td>
-    </tr>
-  </table>
+<h1 align="center">students list</h1>
+<a href="/students/new" class="button">new student</a>
+<table align="center">
+  <tr>
+    <th>id</th>
+    <th>firstname</th>
+    <th>lastname</th>
+    <th>e-mail</th>
+    <th>phone</th>
+  </tr>
+  <tr th:each="student : ${student}">
+    <td>
+      <a href="studentDetails.html" th:href="@{'/students/' + ${student.id}}">
+        <div th:text="${student.id}"></div>
+      </a>
+    </td>
+    <td>
+      <a href="studentDetails.html" th:href="@{'/students/' + ${student.id}}">
+        <div th:text="${student.firstName}"></div>
+      </a>
+    </td>
+    <td>
+      <a href="studentDetails.html" th:href="@{'/students/' + ${student.id}}">
+        <div th:text="${student.lastName}"></div>
+      </a>
+    </td>
+    <td>
+      <a href="studentDetails.html" th:href="@{'/students/' + ${student.id}}">
+        <div th:text="${student.email}"></div>
+      </a>
+    </td>
+    <td>
+      <a href="studentDetails.html" th:href="@{'/students/' + ${student.id}}">
+        <div th:text="${student.phone}"></div>
+      </a>
+    </td>
+  </tr>
+</table>
 </body>
 </html>

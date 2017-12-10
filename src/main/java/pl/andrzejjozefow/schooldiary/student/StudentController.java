@@ -12,58 +12,54 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import pl.andrzejjozefow.schooldiary.student.ContactDetails.ContactDetails;
-import pl.andrzejjozefow.schooldiary.student.ContactDetails.ContactDetailsService;
-import pl.andrzejjozefow.schooldiary.student.dto.StudentDetailsViewDTO;
-import pl.andrzejjozefow.schooldiary.student.dto.StudentListViewDTO;
+import pl.andrzejjozefow.schooldiary.statistics.StatisticsService;
+import pl.andrzejjozefow.schooldiary.student.dto.StudentDetailsViewDto;
+import pl.andrzejjozefow.schooldiary.student.dto.StudentListViewDto;
 
 @RequiredArgsConstructor
 @Controller
 public class StudentController {
 
     private final StudentService studentService;
-    private final ContactDetailsService contactDetailsService;
+    private final StatisticsService statisticsService;
 
     @InitBinder
-    public void setAllowedFields(WebDataBinder dataBinder) {
+    public void setAllowedFields(final WebDataBinder dataBinder) {
         dataBinder.setDisallowedFields("id");
     }
 
     @RequestMapping(value = "/students/new", method = RequestMethod.GET)
-    public String initCreationForm(Map<String, Object> model) {
+    public String initCreationForm(final Map<String, Object> model) {
         model.put("student", new Student());
-        model.put("contactdetails", new ContactDetails());
         return "/student/createOrUpdateStudentForm";
     }
 
     @RequestMapping(value = "/students/new", method = RequestMethod.POST)
-    public String processCreationForm(@Valid Student student, ContactDetails contactDetails,
-        BindingResult result) {
+    public String processCreationForm(@Valid final Student student, final BindingResult result) {
         if (result.hasErrors()) {
             return "/student/createOrUpdateStudentForm";
         } else {
             this.studentService.addStudent(student);
-            contactDetails.setStudent(student);
-            this.contactDetailsService.addContactDetails(contactDetails);
             return "redirect:/students/";
         }
     }
 
     @RequestMapping("/students")
-    public String showStudents(Map<String, Object> model) {
-        List<Student> students = studentService.getAllStudents();
-        List<StudentListViewDTO> studentsListViewDTO = StudentListViewDTO.from(students);
-        model.put("student", studentsListViewDTO);
+    public String showStudents(final Map<String, Object> model) {
+        final List<Student> students = studentService.getAllStudents();
+        final List<StudentListViewDto> studentsListViewDto = StudentListViewDto.from(students);
+        model.put("student", studentsListViewDto);
         return "/student/studentsList";
     }
 
     @RequestMapping("/students/{studentId}")
-    public String showStudent(@PathVariable("studentId") Integer studentId,
-        Map<String, Object> model) {
-        Optional<Student> student = studentService.getStudent(studentId);
+    public String showStudent(@PathVariable("studentId") final Integer studentId,
+        final Map<String, Object> model) {
+        final Optional<Student> student = studentService.getStudent(studentId);
         if (student.isPresent()) {
-            StudentDetailsViewDTO studentDetailsViewDTO = new StudentDetailsViewDTO(student.get());
-            model.put("student", studentDetailsViewDTO);
+            final Double studentAvgScore = statisticsService.getStudentAvgScore(studentId);
+            final StudentDetailsViewDto studentDetailsViewDto = new StudentDetailsViewDto(student.get(),studentAvgScore);
+            model.put("student", studentDetailsViewDto);
             return "/student/studentDetails";
         } else {
             return "welcome";

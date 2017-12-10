@@ -7,7 +7,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import lombok.AllArgsConstructor;
@@ -15,7 +14,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
-import pl.andrzejjozefow.schooldiary.student.ContactDetails.ContactDetails;
 import pl.andrzejjozefow.schooldiary.lesson.Lesson;
 import pl.andrzejjozefow.schooldiary.model.BaseEntity;
 
@@ -34,19 +32,22 @@ public class Student extends BaseEntity {
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private Date birthDate;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "student")
-    private ContactDetails contactDetails;
+    private String email;
+
+    private String phoneNumber;
+
+    private String street;
+
+    private String city;
+
+    private String zipCode;
+
+    private String country;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "student")
     private Set<Lesson> lessons = new LinkedHashSet<>();
 
-    public Student(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthDate = new Date();
-    }
-
-    public void addLesson(Lesson lesson) {
+    public void addLesson(final Lesson lesson) {
         lessons.add(lesson);
         lesson.setStudent(this);
     }

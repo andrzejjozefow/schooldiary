@@ -1,73 +1,84 @@
 <html xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <title>Student Details</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
-  </head>
-  <body>
-    <h1>Student Information</h1>
-    <table>
-      <tr>
-        <td>Name:</td>
-        <td th:text="${student.studentFirstName}"/>
-      </tr>
-      <tr>
-        <td>Surname:   </td>
-        <td th:text="${student.studentLastName}" />
-      </tr>
-      <tr>
-        <td>Birth date:   </td>
-        <td th:text="${student.studentBirthDate}" />
-      </tr>
-      <tr>
-        <td>Email:   </td>
-        <td th:text="${student.studentEmail}" />
-      </tr>
-      <tr>
-        <td>Phone:   </td>
-        <td th:text="${student.studentPhone}" />
-      </tr>
-      <tr>
-        <td>Street/number:   </td>
-        <td th:text="${student.studentStreet}" />
-      </tr>
-      <tr>
-        <td>City:   </td>
-        <td th:text="${student.studentCity}" />
-      </tr>
-      <tr>
-        <td>Zip code:   </td>
-        <td th:text="${student.studentZipCode}" />
-      </tr>
-      <tr>
-        <td>Country:   </td>
-        <td th:text="${student.studentCountry}" />
-      </tr>
-    </table>
-    <br />
-    <br />
-    <br />
-    <table>
-      <tr>
-        <td>
-          <h2>Lessons</h2>
-        </td>
-        <td>
-          <a href="createOrUpdateLessonForm.html" th:href="@{'/students/' + ${student.studentId} + '/lessons/new'}">
-            <button class="button">ADD NEW LESSON</button>
-          </a>
-        </td>
-      </tr>
-    </table>
-    <table border="1">
-      <tr>
-        <th>Subject</th>
-        <th>Date</th>
-      </tr>
-      <tr th:each="lesson : ${student.lessonsDTO}">
-        <td th:text="${lesson?.lessonSubject}"/>
-        <td th:text="${lesson?.lessonDate}"/>
-      </tr>
-    </table>
-  </body>
+<head>
+  <title>Student Details</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
+</head>
+<body>
+<h1>Student Information</h1>
+<table>
+  <tr>
+    <td>Name:</td>
+    <td th:text="${student.firstName}"/>
+  </tr>
+  <tr>
+    <td>Surname:</td>
+    <td th:text="${student.lastName}"/>
+  </tr>
+  <tr>
+    <td>Birth date:</td>
+    <td th:text="${student.birthDate}"/>
+  </tr>
+  <tr>
+    <td>Email:</td>
+    <td th:text="${student.email}"/>
+  </tr>
+  <tr>
+    <td>Phone:</td>
+    <td th:text="${student.phone}"/>
+  </tr>
+  <tr>
+    <td>Street/number:</td>
+    <td th:text="${student.street}"/>
+  </tr>
+  <tr>
+    <td>City:</td>
+    <td th:text="${student.city}"/>
+  </tr>
+  <tr>
+    <td>Zip code:</td>
+    <td th:text="${student.zipCode}"/>
+  </tr>
+  <tr>
+    <td>Country:</td>
+    <td th:text="${student.country}"/>
+  </tr>
+</table>
+
+<h3>STATISTICS</h3>
+<table>
+  <tr>
+    <td width="20%">average score:</td>
+    <td th:text="${student.avgScore}"/>
+  </tr>
+</table>
+<br/>
+<br/>
+<br/>
+<table>
+  <tr>
+    <td>
+      <h2>Lessons</h2>
+    </td>
+    <td>
+      <a href="createOrUpdateLessonForm.html"
+         th:href="@{'/students/' + ${student.id} + '/lessons/new'}">
+        <button class="button">ADD NEW LESSON</button>
+      </a>
+    </td>
+  </tr>
+</table>
+<table border="1">
+  <tr>
+    <th>Subject</th>
+    <th>Score</th>
+    <th>Date</th>
+  </tr>
+  <tr th:each="lesson : ${student.lessonsDto}">
+    <td th:text="${lesson?.subject}"/>
+    <td th:text="${lesson?.score}"/>
+    <td th:text="${lesson?.date}"/>
+  </tr>
+</table>
+</body>
 </html>

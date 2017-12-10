@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Range;
 import pl.andrzejjozefow.schooldiary.model.BaseEntity;
 import pl.andrzejjozefow.schooldiary.student.Student;
 
@@ -29,6 +30,7 @@ public class Lesson extends BaseEntity {
 
     private Date date;
 
+    @Range(min=0, max=5, message = "Score should be between 0 and 5")
     private Integer score;
 
 }

@@ -13,9 +13,9 @@
         <th>Date</th>
       </tr>
       <tr th:each="lesson : ${lessons}">
-        <td th:text="${lesson.studentFirstName} + ' ' + ${lesson.studentLastName}"></td>
-        <td th:text="${lesson.lessonSubject}"></td>
-        <td th:text="${lesson.lessonDate}"/>
+        <td th:text="${lesson.firstName} + ' ' + ${lesson.lastName}"></td>
+        <td th:text="${lesson.subject}"></td>
+        <td th:text="${lesson.date}"/>
       </tr>
     </table>
   </body>
