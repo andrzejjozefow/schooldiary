@@ -6,7 +6,7 @@
 
   <groupId>pl.andrzejjozefow</groupId>
   <artifactId>schooldiary</artifactId>
-  <version>0.1</version>
+  <version>0.1.0</version>
   <packaging>jar</packaging>
 
   <name>schooldiary</name>
@@ -16,7 +16,7 @@
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
     <version>1.5.7.RELEASE</version>
-    <relativePath/> <!-- lookup parent from repository -->
+    <relativePath/>
   </parent>
 
   <properties>
@@ -75,7 +75,38 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+      </plugin>
     </plugins>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-checkstyle-plugin</artifactId>
+          <version>2.17</version>
+          <executions>
+            <execution>
+              <id>checkstyle-validation</id>
+              <phase>validate</phase>
+              <configuration>
+                <configLocation>checkstyle/checkstyle.xml</configLocation>
+                <suppressionsLocation>checkstyle/checkstyle-suppression.xml</suppressionsLocation>
+                <consoleOutput>true</consoleOutput>
+                <failsOnError>true</failsOnError>
+                <failOnViolation>true</failOnViolation>
+                <violationSeverity>info</violationSeverity>
+                <includeTestSourceDirectory>true</includeTestSourceDirectory>
+              </configuration>
+              <goals>
+                <goal>check</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
   </build>
 
 </project>
