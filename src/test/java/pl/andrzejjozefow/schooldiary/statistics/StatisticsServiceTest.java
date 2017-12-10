@@ -36,15 +36,9 @@ public class StatisticsServiceTest {
             new Lesson(null, "technika gamowa", new Date(), 2)
         );
         final Student student = new Student(
-            "jan",
-            "nowak",
-            new Date(),
-            "asdfg@wp.pl",
-            "+123456789",
-            "Kwiatowa 2",
-            "Stare Pole",
-            "12-345",
-            "Polska", lessons);
+            "jan", "nowak", new Date(), "asdfg@wp.pl", "+123456789",
+            "Kwiatowa 2", "Stare Pole", "12-345", "Polska", lessons
+        );
 
         given(studentRepository.findOne(anyInt())).willReturn(student);
 
@@ -57,13 +51,10 @@ public class StatisticsServiceTest {
 
     @Test
     public void shouldCalculateAvgScoreOnStudentWithoutLessons() {
-        final Student studentWithoutLessons = new Student("jan", "nowak", new Date(),
-            "asdfg@wp.pl",
-            "+123456789",
-            "Kwiatowa 2",
-            "Stare Pole",
-            "12-345",
-            "Polska", Collections.emptySet());
+        final Student studentWithoutLessons = new Student(
+            "jan", "nowak", new Date(), "asdfg@wp.pl", "+123456789",
+            "Kwiatowa 2", "Stare Pole", "12-345", "Polska", Collections.emptySet()
+        );
 
         given(studentRepository.findOne(anyInt())).willReturn(studentWithoutLessons);
 
