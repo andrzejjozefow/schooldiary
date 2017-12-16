@@ -28,7 +28,7 @@ public class SchoolDiaryApplication {
     public void initData() {
 
         final Student janNowak = new Student(
-            "jan", "nowak", new Date(), "asdfg@wp.pl", "+123456789",
+            "Jan", "Nowak", new Date(), "asdfg@wp.pl", "+123456789",
             "Kwiatowa 2", "Stare Pole", "12-345", "Polska", null
         );
         studentRepository.save(janNowak);

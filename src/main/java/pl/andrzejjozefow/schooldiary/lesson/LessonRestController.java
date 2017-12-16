@@ -1,5 +1,7 @@
 package pl.andrzejjozefow.schooldiary.lesson;
 
+import static pl.andrzejjozefow.schooldiary.lesson.dto.LessonListViewDto.from;
+
 import java.util.List;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +19,6 @@ public class LessonRestController {
     @RequestMapping("/lessons.json")
     public List<LessonListViewDto> lessons() {
         final List<Lesson> lessons = lessonService.getAllLessons();
-        final List<LessonListViewDto> lessonsListViewDto = LessonListViewDto.from(lessons);
-        return lessonsListViewDto;
+        return from(lessons);
     }
 }
