@@ -16,7 +16,7 @@ public class LessonRestController {
     }
 
     @RequestMapping("/lessons.json")
-    public List<LessonListViewDto> lessons(final Map<String, Object> model) {
+    public List<LessonListViewDto> lessons() {
         final List<Lesson> lessons = lessonService.getAllLessons();
         final List<LessonListViewDto> lessonsListViewDto = LessonListViewDto.from(lessons);
         return lessonsListViewDto;
