@@ -12,14 +12,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
             .withUser("user").password("123").roles("USER");
     }
 
     @Override
-    protected void configure(HttpSecurity httpSecurity) throws Exception {
-
+    protected void configure(final HttpSecurity httpSecurity) throws Exception {
         httpSecurity
             .authorizeRequests()
             .anyRequest()
@@ -28,7 +27,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             //.addFilterBefore(customFilter(), BasicAuthenticationFilter.class)
             .httpBasic();
         httpSecurity.csrf().disable();
-
     }
 
     @Bean

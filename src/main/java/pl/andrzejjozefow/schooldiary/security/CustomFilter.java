@@ -14,17 +14,16 @@ public class CustomFilter implements Filter {
 
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(final FilterConfig filterConfig) throws ServletException {
         log.info("Init::called");
     }
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+    public void doFilter(final ServletRequest servletRequest, final ServletResponse servletResponse,
+                         final FilterChain filterChain) throws IOException, ServletException {
         log.info("doFilter::called");
-
-        HttpServletRequest request = (HttpServletRequest) servletRequest;
-
-        Principal userPrincipal = request.getUserPrincipal();
+        final HttpServletRequest request = (HttpServletRequest) servletRequest;
+        final Principal userPrincipal = request.getUserPrincipal();
         log.info("userPrinciple::" + userPrincipal);
         filterChain.doFilter(servletRequest, servletResponse);
     }
